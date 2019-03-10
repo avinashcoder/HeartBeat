@@ -3,4 +3,17 @@
 
     <string name="and">  <![CDATA[&]]> </string>
     <string name="problems_signing_in"><u>Having Problems Signing In ?</u></string>
+    <string name="enter_your_name">Enter Your Name</string>
+    <string name="birthday_dd_mm_yyyy">Birthday (DD/MM/YYYY)</string>
+    <string name="next">NEXT</string>
+    <string name="verify_now">VERIFY NOW</string>
+    <string name="by_signing_up_you_agree_to_our">By Signing up, you agree to our</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="terms_of_service">Terms of Service</string>
+    <string name="enter_otp">Enter OTP</string>
+    <string name="send_otp">SEND OTP</string>
+    <string name="enter_mobile_number">Enter Mobile Number</string>
+    <string name="_91">+91</string>
+    <string name="heartbeat">HeartBeat</string>
+    <string name="donate_blood_save_life">Donate Blood, Save Life</string>
 </resources>

@@ -17,7 +17,8 @@
             android:layout_width="200dp"
             android:layout_height="250dp"
             android:layout_gravity="center"
-            android:src="@drawable/logo"></ImageView>
+            android:src="@drawable/logo"
+            android:contentDescription="@string/heartbeat" />
 
 
         <LinearLayout
@@ -29,9 +30,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
+                android:layout_marginStart="40dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginEnd="20dp"
                 android:orientation="horizontal"
                 android:weightSum="10">
 
@@ -39,11 +40,12 @@
                     android:id="@+id/ed_country_code"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
                     android:layout_weight="2"
                     android:background="#00000000"
-                    android:paddingLeft="10dp"
-                    android:text="+91"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="1dp"
+                    android:text="@string/_91"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp" />
 
@@ -51,13 +53,14 @@
                     android:id="@+id/ed_mob_no"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
                     android:layout_weight="8"
                     android:background="#00000000"
-                    android:hint="Enter Mobile Number"
+                    android:hint="@string/enter_mobile_number"
                     android:inputType="number"
                     android:maxEms="10"
-                    android:paddingRight="10dp"
+                    android:paddingStart="1dp"
+                    android:paddingEnd="10dp"
                     android:textColor="#FFFFFF"
                     android:textColorHint="#FFFFFF"
                     android:textSize="20sp" />
@@ -82,7 +85,7 @@
                 android:paddingTop="5dp"
                 android:paddingRight="30dp"
                 android:paddingBottom="5dp"
-                android:text="SEND OTP"
+                android:text="@string/send_otp"
                 android:textColor="#F44336"
                 android:textSize="18sp" />
         </LinearLayout>
@@ -103,9 +106,10 @@
                 android:layout_marginRight="60dp"
                 android:background="#00000000"
                 android:gravity="center"
-                android:hint="Enter OTP"
+                android:hint="@string/enter_otp"
                 android:inputType="number"
-                android:paddingRight="10dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
                 android:textColor="#FFFFFF"
                 android:textColorHint="#FFFFFF"
                 android:textSize="20sp" />
@@ -129,7 +133,7 @@
                 android:paddingTop="5dp"
                 android:paddingRight="30dp"
                 android:paddingBottom="5dp"
-                android:text="VERIFY NOW"
+                android:text="@string/verify_now"
                 android:textColor="#F44336"
                 android:textSize="18sp" />
         </LinearLayout>
@@ -145,34 +149,34 @@
         android:layout_gravity="bottom"
         android:gravity="center"
         android:orientation="vertical"
-        android:layout_marginBottom="5dp">
+        android:layout_marginBottom="10dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#FFF"
-            android:textSize="10sp"
-            android:text="By Signing up, you agree to our"/>
+            android:textSize="12sp"
+            android:text="@string/by_signing_up_you_agree_to_our"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="10sp"
-                android:text="Terms of Service"/>
+                android:textSize="12sp"
+                android:text="@string/terms_of_service"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#FFF"
                 android:layout_marginLeft="2dp"
                 android:layout_marginRight="2dp"
-                android:textSize="10sp"
+                android:textSize="12sp"
                 android:text="@string/and"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="10sp"
-                android:text="Privacy Policy"/>
+                android:textSize="12sp"
+                android:text="@string/privacy_policy"/>
 
         </LinearLayout>
         <TextView
@@ -180,7 +184,7 @@
             android:layout_height="wrap_content"
             android:text="@string/problems_signing_in"
             android:layout_marginTop="10dp"
-            android:textSize="11sp"
+            android:textSize="12sp"
             android:textColor="#FFF"/>
     </LinearLayout>
 
