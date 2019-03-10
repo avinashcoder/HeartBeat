@@ -16,4 +16,6 @@
     <string name="_91">+91</string>
     <string name="heartbeat">HeartBeat</string>
     <string name="donate_blood_save_life">Donate Blood, Save Life</string>
+    <string name="what_is_your_blood_group"><u>What is your blood group ?</u></string>
+
 </resources>
