@@ -1,10 +1,10 @@
 <resources>
-    <string name="app_name">HeartBeat</string>
+    <string name="app_name">LifeLine</string>
 
     <string name="and">  <![CDATA[&]]> </string>
     <string name="problems_signing_in"><u>Having Problems Signing In ?</u></string>
     <string name="enter_your_name">Enter Your Name</string>
-    <string name="birthday_dd_mm_yyyy">Birthday (DD/MM/YYYY)</string>
+    <string name="birthday_dd_mm_yyyy">Birthday</string>
     <string name="next">NEXT</string>
     <string name="verify_now">VERIFY NOW</string>
     <string name="by_signing_up_you_agree_to_our">By Signing up, you agree to our</string>
@@ -14,8 +14,18 @@
     <string name="send_otp">SEND OTP</string>
     <string name="enter_mobile_number">Enter Mobile Number</string>
     <string name="_91">+91</string>
-    <string name="heartbeat">HeartBeat</string>
+    <string name="lifeline">LifeLine</string>
     <string name="donate_blood_save_life">Donate Blood, Save Life</string>
-    <string name="what_is_your_blood_group"><u>What is your blood group ?</u></string>
+    <string name="what_is_your_blood_group">What is your blood group ?</string>
+    <string name="wow">WOW !</string>
+    <string name="hey_plese_select_your_location">Hey ! Plese select your location.</string>
+    <string name="confirm_your_location_you_can_also_add_your_location_by_tapping_on_the_map_icon">Confirm your location\n You can also add your location by tapping on the map icon</string>
+    <string name="trying_to_get_your_current_location_tap_on_refresh_button_to_get_your_current_location">Trying to get your current location, Tap on the below refresh button to get your current location</string>
+    <string name="let_s_go">Let\'s Go</string>
+    <string name="get_and_donate_blood_n24_7">Get and donate blood 24/7</string>
+    <string name="you_are_currently_interested_for">You are currently interested for ?</string>
+    <string name="donar">Donar</string>
+    <string name="acceptor">Acceptor</string>
+    <string name="you_can_change_this_status_later_from_your_profile">You can change this status later from your profile</string>
 
 </resources>

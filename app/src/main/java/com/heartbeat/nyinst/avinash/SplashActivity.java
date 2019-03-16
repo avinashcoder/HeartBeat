@@ -20,6 +20,7 @@ public class SplashActivity extends AppCompatActivity {
                 Intent mainIntent = new Intent(SplashActivity.this,MobileVerificationActivity.class);
                 SplashActivity.this.startActivity(mainIntent);
                 SplashActivity.this.finish();
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         }, SPLASH_DISPLAY_LENGTH);
     }
