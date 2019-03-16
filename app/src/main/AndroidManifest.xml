@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.heartbeat.nyinst.avinash">
+    package="com.lifeline.nyinst.avinash">
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -14,11 +14,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RegistrationLocationActivity"/>
-        <activity android:name=".RegistrationBloodgoupActivity" />
-        <activity android:name=".RegistrationNameActivity" />
-        <activity android:name=".MobileVerificationActivity" />
-        <activity android:name=".SplashActivity">
+        <activity android:name="com.lifeline.nyinst.avinash.RegistrationLocationActivity"/>
+        <activity android:name="com.lifeline.nyinst.avinash.RegistrationBloodgoupActivity" />
+        <activity android:name="com.lifeline.nyinst.avinash.RegistrationNameActivity" />
+        <activity android:name="com.lifeline.nyinst.avinash.MobileVerificationActivity" />
+        <activity android:name="com.lifeline.nyinst.avinash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,4 +1,4 @@
-package com.heartbeat.nyinst.avinash;
+package com.lifeline.nyinst.avinash;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

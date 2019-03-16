@@ -1,4 +1,4 @@
-package com.heartbeat.nyinst.avinash;
+package com.lifeline.nyinst.avinash;
 
 import android.content.Intent;
 import android.graphics.Color;
