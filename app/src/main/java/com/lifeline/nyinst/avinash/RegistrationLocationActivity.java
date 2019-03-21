@@ -1,5 +1,6 @@
 package com.lifeline.nyinst.avinash;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -16,6 +17,7 @@ import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -45,6 +47,7 @@ public class RegistrationLocationActivity extends AppCompatActivity implements L
 
     TextView textview_reg_location;
     ImageView imgLocationRefresh;
+    Button btnRegLocationNext;
     Animation rotateAnimation;
 
     Geocoder geocoder;
@@ -64,6 +67,7 @@ public class RegistrationLocationActivity extends AppCompatActivity implements L
         setContentView(R.layout.activity_registration_location);
         textview_reg_location = findViewById(R.id.tv_reg_location);
         imgLocationRefresh=findViewById(R.id.img_view_refresh_location);
+        btnRegLocationNext=findViewById(R.id.btn_reg_location_next);
         geocoder = new Geocoder(this, Locale.getDefault());
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
@@ -71,6 +75,15 @@ public class RegistrationLocationActivity extends AppCompatActivity implements L
 
         enableLoc();
         checkLocationPermission();
+
+        btnRegLocationNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i= new Intent(RegistrationLocationActivity.this,RegistrationBloodgoupActivity.class);
+                startActivity(i);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+        });
 
         imgLocationRefresh.setOnClickListener(new View.OnClickListener() {
             @Override

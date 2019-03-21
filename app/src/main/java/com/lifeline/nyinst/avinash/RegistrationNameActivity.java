@@ -73,7 +73,7 @@ public class RegistrationNameActivity extends AppCompatActivity {
         bt_reg_name_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i= new Intent(RegistrationNameActivity.this,RegistrationBloodgoupActivity.class);
+                Intent i= new Intent(RegistrationNameActivity.this,RegistrationLocationActivity.class);
                 startActivity(i);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }

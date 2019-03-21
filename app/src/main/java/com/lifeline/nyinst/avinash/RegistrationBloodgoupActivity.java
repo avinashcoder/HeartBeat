@@ -55,7 +55,7 @@ public class RegistrationBloodgoupActivity extends AppCompatActivity {
         bt_reg_bloodgroup_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(RegistrationBloodgoupActivity.this,RegistrationLocationActivity.class);
+                Intent i=new Intent(RegistrationBloodgoupActivity.this,RegistrationGenderActivity.class);
                 startActivity(i);
                 overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
             }

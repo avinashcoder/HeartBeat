@@ -57,16 +57,17 @@
 
 
         <Button
+            android:id="@+id/btn_reg_location_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="50dp"
             android:paddingRight="50dp"
-            android:textColor="#FFF"
-            android:background="@drawable/circular_corner_button_dark"
+            android:textColor="@color/colorPrimary"
+            android:background="@drawable/curved_rectangular_red_border"
             android:textSize="15sp"
             android:layout_marginTop="25dp"
             android:textStyle="bold"
-            android:text="@string/let_s_go"/>
+            android:text="@string/next"/>
 
     </LinearLayout>
 

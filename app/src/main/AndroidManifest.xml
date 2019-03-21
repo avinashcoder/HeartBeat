@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.lifeline.nyinst.avinash">
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/lifelinelogo"
+        android:icon="@drawable/lifeline"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/lifelinelogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.lifeline.nyinst.avinash.RegistrationLocationActivity"/>
-        <activity android:name="com.lifeline.nyinst.avinash.RegistrationBloodgoupActivity" />
-        <activity android:name="com.lifeline.nyinst.avinash.RegistrationNameActivity" />
-        <activity android:name="com.lifeline.nyinst.avinash.MobileVerificationActivity" />
-        <activity android:name="com.lifeline.nyinst.avinash.SplashActivity">
+        <activity android:name=".RegistrationGenderActivity"></activity>
+        <activity android:name=".RegistrationLocationActivity" />
+        <activity android:name=".RegistrationBloodgoupActivity" />
+        <activity android:name=".RegistrationNameActivity" />
+        <activity android:name=".MobileVerificationActivity" />
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

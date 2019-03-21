@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context="com.lifeline.nyinst.avinash.RegistrationGenderActivity">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:layout_margin="30dp"
+        android:background="@drawable/curved_rectangular_white_border"
+        android:paddingRight="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFF"
+            android:textSize="16sp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="Hey! Can I know your gender?"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:weightSum="2"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:layout_weight="1">
+                <ImageView
+                    android:id="@+id/reg_gender_male"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:src="@drawable/malelogo"/>
+                <ImageView
+                    android:id="@+id/reg_gender_male_mark"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center|end"
+                    android:layout_marginBottom="20dp"
+                    android:src="@drawable/blank"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|bottom"
+                    android:textColor="#FFF"
+                    android:layout_marginTop="2dp"
+                    android:text="Male"/>
+            </FrameLayout>
+
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:layout_weight="1">
+                <ImageView
+                    android:id="@+id/reg_gender_female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:src="@drawable/femalelogo"/>
+
+                <ImageView
+                    android:id="@+id/reg_gender_female_mark"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center|end"
+                    android:layout_marginBottom="20dp"
+                    android:src="@drawable/blank"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|bottom"
+                    android:textColor="#FFF"
+                    android:layout_marginTop="22dp"
+                    android:text="Female"/>
+            </FrameLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:layout_margin="30dp"
+        android:background="@drawable/curved_rectangular_white_border"
+        android:paddingRight="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFF"
+            android:textSize="16sp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="Are you belong to ?"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:weightSum="3"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_weight="1">
+                <ImageView
+                    android:id="@+id/reg_usertype_individual"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/individual"/>
+                <ImageView
+                    android:id="@+id/reg_usertype_individual_mark"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center|end"
+                    android:layout_marginBottom="20dp"
+                    android:src="@drawable/blank"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|bottom"
+                    android:textColor="#FFF"
+                    android:layout_marginTop="2dp"
+                    android:text="Individual"/>
+            </FrameLayout>
+
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_weight="1">
+                <ImageView
+                    android:id="@+id/reg_usertype_bloodbank"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/bloodbank"/>
+
+                <ImageView
+                    android:id="@+id/reg_usertype_bloodbank_mark"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center|end"
+                    android:layout_marginBottom="20dp"
+                    android:src="@drawable/blank"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|bottom"
+                    android:gravity="center"
+                    android:textColor="#FFF"
+                    android:layout_marginTop="2dp"
+                    android:text="Bank"/>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_weight="1">
+                <ImageView
+                    android:id="@+id/reg_usertype_doctor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/doctor"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|bottom"
+                    android:textColor="#FFF"
+                    android:layout_marginTop="2dp"
+                    android:text="Doctor"/>
+
+                <ImageView
+                    android:id="@+id/reg_usertype_doctor_mark"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center|end"
+                    android:layout_marginBottom="20dp"
+                    android:src="@drawable/blank"/>
+            </FrameLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_reg_gender_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/let_s_go"
+        android:textColor="#F44336"
+        android:layout_marginTop="20dp"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:paddingLeft="60dp"
+        android:textSize="18sp"
+        android:background="@drawable/circular_corner_button"
+        android:paddingRight="60dp"/>
+
+</LinearLayout>
