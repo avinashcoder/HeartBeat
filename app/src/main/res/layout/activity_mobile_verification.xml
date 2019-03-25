@@ -32,11 +32,11 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
+                android:layout_marginStart="60dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:orientation="horizontal"
-                android:weightSum="10">
+                android:weightSum="13">
 
                 <EditText
                     android:id="@+id/ed_country_code"
@@ -57,13 +57,12 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:layout_weight="8"
+                    android:layout_weight="10"
                     android:background="#00000000"
                     android:hint="@string/enter_mobile_number"
                     android:inputType="number"
                     android:maxEms="10"
                     android:paddingStart="1dp"
-                    android:paddingEnd="10dp"
                     android:textColor="#FFFFFF"
                     android:textColorHint="#FFFFFF"
                     android:textSize="20sp" />
@@ -72,25 +71,43 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="50dp"
                 android:layout_marginTop="1dp"
-                android:layout_marginRight="30dp"
+                android:layout_marginRight="50dp"
                 android:background="#FFF" />
 
-            <Button
-                android:id="@+id/btn_send_otp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="40dp"
-                android:background="@drawable/circular_corner_button"
-                android:paddingLeft="30dp"
-                android:paddingTop="5dp"
-                android:paddingRight="30dp"
-                android:paddingBottom="5dp"
-                android:text="@string/send_otp"
-                android:textColor="#F44336"
-                android:textSize="18sp" />
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/btn_send_otp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/circular_corner_button"
+                    android:paddingLeft="30dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="30dp"
+                    android:paddingBottom="5dp"
+                    android:text="@string/send_otp"
+                    android:textColor="#F44336"
+                    android:textSize="18sp" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="wrap_content"
+                    android:visibility="gone"
+                    android:layout_gravity="center"
+                    android:indeterminateDrawable="@drawable/progressbar"
+                    android:layout_height="wrap_content" />
+
+            </FrameLayout>
+
+
         </LinearLayout>
 
         <LinearLayout
@@ -152,45 +169,51 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:layout_marginBottom="10dp"
         android:gravity="center"
-        android:orientation="vertical"
-        android:layout_marginBottom="10dp">
+        android:orientation="vertical">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/by_signing_up_you_agree_to_our"
             android:textColor="#FFF"
-            android:textSize="12sp"
-            android:text="@string/by_signing_up_you_agree_to_our"/>
+            android:textSize="12sp" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:text="@string/terms_of_service"/>
+                android:text="@string/terms_of_service"
+                android:textSize="12sp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#FFF"
                 android:layout_marginLeft="2dp"
                 android:layout_marginRight="2dp"
-                android:textSize="12sp"
-                android:text="@string/and"/>
+                android:text="@string/and"
+                android:textColor="#FFF"
+                android:textSize="12sp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:text="@string/privacy_policy"/>
+                android:text="@string/privacy_policy"
+                android:textSize="12sp" />
 
         </LinearLayout>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/problems_signing_in"
             android:layout_marginTop="10dp"
-            android:textSize="12sp"
-            android:textColor="#FFF"/>
+            android:text="@string/problems_signing_in"
+            android:textColor="#FFF"
+            android:textSize="12sp" />
     </LinearLayout>
 
 </FrameLayout>
