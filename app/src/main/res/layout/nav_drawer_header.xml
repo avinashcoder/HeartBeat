@@ -1,9 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
+    android:background="@color/colorPrimary"
     android:layout_height="200dp">
 
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/nav_drawer_user_profile_pic"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#FFF"
+        android:src="@drawable/profile_pic_default"/>
 
-</LinearLayout>
+   <TextView
+       android:id="@+id/nav_drawer_user_name"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="Name of the User"
+       android:layout_gravity="center"
+       android:textSize="18sp"
+       android:textColor="#FFF"
+       android:layout_marginTop="30dp"/>
+
+    <TextView
+        android:id="@+id/nav_drawer_user_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Address of the User"
+        android:layout_gravity="bottom|center"
+        android:textSize="10sp"
+        android:textColor="#FFF"
+        android:layout_marginBottom="5dp"
+        android:drawableLeft="@drawable/ic_action_location_white"
+        android:layout_marginTop="35dp"/>
+
+    <ImageView
+        android:id="@+id/nav_drawer_user_blood_group"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center|end"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/a_positive"/>
+
+</FrameLayout>

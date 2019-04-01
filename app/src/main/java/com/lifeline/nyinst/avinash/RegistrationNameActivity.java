@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -75,9 +76,21 @@ public class RegistrationNameActivity extends AppCompatActivity {
         bt_reg_name_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i= new Intent(RegistrationNameActivity.this,RegistrationLocationActivity.class);
-                startActivity(i);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                if(et_name.getText().equals(""))
+                {
+                    Toast.makeText(getApplicationContext(),"Plese Enter Your Name",Toast.LENGTH_SHORT).show();
+                }
+                else if(et_birthday.getText().equals(""))
+                {
+                    Toast.makeText(getApplicationContext(),"Plese Enter Your Birthday",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    SplashActivity.nameFinal=et_name.getText().toString();
+                    SplashActivity.dateOfBirthFinal=et_birthday.getText().toString();
+                    Intent i = new Intent(RegistrationNameActivity.this, RegistrationLocationActivity.class);
+                    startActivity(i);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                }
             }
         });
     }

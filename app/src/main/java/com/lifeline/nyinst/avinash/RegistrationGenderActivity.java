@@ -6,11 +6,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class RegistrationGenderActivity extends AppCompatActivity {
 
     ImageView genderMale,genderFemale,individual,bloodBank,doctor,genderMaleMark,genderFemaleMark,individualMark,bloodBankMark,doctorMark;
     Button regGenderNext;
+    String gender="",userType="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,9 +32,21 @@ public class RegistrationGenderActivity extends AppCompatActivity {
         regGenderNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(RegistrationGenderActivity.this,HomeActivity.class);
-                startActivity(i);
-                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+                if(gender.equals(""))
+                {
+                    Toast.makeText(RegistrationGenderActivity.this,"Plese select your gender",Toast.LENGTH_SHORT).show();
+                }
+                else if(userType.equals(""))
+                {
+                    Toast.makeText(RegistrationGenderActivity.this,"Plese tell us your category",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    SplashActivity.genderFinal=gender;
+                    SplashActivity.userTypeFinal=userType;
+                    Intent i = new Intent(RegistrationGenderActivity.this, HomeActivity.class);
+                    startActivity(i);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                }
             }
         });
 
@@ -41,6 +55,7 @@ public class RegistrationGenderActivity extends AppCompatActivity {
             public void onClick(View v) {
                 genderMaleMark.setImageResource(R.drawable.mark);
                 genderFemaleMark.setImageResource(R.drawable.blank);
+                gender="Male";
             }
         });
 
@@ -49,6 +64,7 @@ public class RegistrationGenderActivity extends AppCompatActivity {
             public void onClick(View v) {
                 genderFemaleMark.setImageResource(R.drawable.mark);
                 genderMaleMark.setImageResource(R.drawable.blank);
+                gender="Female";
             }
         });
 
@@ -58,6 +74,7 @@ public class RegistrationGenderActivity extends AppCompatActivity {
                 bloodBankMark.setImageResource(R.drawable.blank);
                 individualMark.setImageResource(R.drawable.mark);
                 doctorMark.setImageResource(R.drawable.blank);
+                userType="Individual";
             }
         });
 
@@ -67,6 +84,7 @@ public class RegistrationGenderActivity extends AppCompatActivity {
                 bloodBankMark.setImageResource(R.drawable.mark);
                 individualMark.setImageResource(R.drawable.blank);
                 doctorMark.setImageResource(R.drawable.blank);
+                userType="Bloodbank";
             }
         });
 
@@ -76,6 +94,7 @@ public class RegistrationGenderActivity extends AppCompatActivity {
                 bloodBankMark.setImageResource(R.drawable.blank);
                 individualMark.setImageResource(R.drawable.blank);
                 doctorMark.setImageResource(R.drawable.mark);
+                userType="Doctor";
             }
         });
     }

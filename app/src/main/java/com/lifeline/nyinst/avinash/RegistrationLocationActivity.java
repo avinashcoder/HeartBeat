@@ -364,12 +364,12 @@ public class RegistrationLocationActivity extends AppCompatActivity {
     Geocoder geocoder;
     List<Address> addresses;
     Double latitude, longitude;
-    String address, area, city, country, postalcode;
+    String address="", area, city, country, postalcode;
 
     private String mLastUpdateTime;
 
     // location updates interval - 10sec
-    private static final long UPDATE_INTERVAL_IN_MILLISECONDS = 10000;
+    private static final long UPDATE_INTERVAL_IN_MILLISECONDS = 5000;
 
     // fastest updates interval - 5 sec
     // location updates will be received if another app is requesting the locations
@@ -404,9 +404,11 @@ public class RegistrationLocationActivity extends AppCompatActivity {
         btnRegLocationNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i= new Intent(RegistrationLocationActivity.this,RegistrationBloodgoupActivity.class);
-                startActivity(i);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                if(!address.equals("")) {
+                    Intent i = new Intent(RegistrationLocationActivity.this, RegistrationBloodgoupActivity.class);
+                    startActivity(i);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                }
             }
         });
 
@@ -476,6 +478,8 @@ public class RegistrationLocationActivity extends AppCompatActivity {
         if (mCurrentLocation != null) {
             latitude=mCurrentLocation.getLatitude();
             longitude=mCurrentLocation.getLongitude();
+            SplashActivity.latitudeFinal=latitude;
+            SplashActivity.longitudeFinal=longitude;
 
             try
             {
@@ -488,6 +492,12 @@ public class RegistrationLocationActivity extends AppCompatActivity {
                 postalcode=addresses.get(0).getPostalCode();
 
                 txtLocationResult.setText(address);
+
+                SplashActivity.addressFinal=address;
+                SplashActivity.cityFinal=area;
+                SplashActivity.stateFinal=city;
+                SplashActivity.countryFinal=country;
+
                 btnRegLocationNext.setVisibility(View.VISIBLE);
                 locationProgressBar.setVisibility(View.GONE);
 

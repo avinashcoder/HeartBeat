@@ -8,12 +8,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class RegistrationBloodgoupActivity extends AppCompatActivity {
 
     LinearLayout ll_a_positive,ll_b_positive,ll_ab_positive,ll_o_positive,ll_a_negative,ll_b_negative,ll_ab_negative,ll_o_negative;
     Button bt_reg_bloodgroup_next;
     TextView bloodStatusDonar,bloodStatusAcceptor;
+    String bloodGroup="",userInterest="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +41,7 @@ public class RegistrationBloodgoupActivity extends AppCompatActivity {
                 bloodStatusAcceptor.setTextColor(Color.WHITE);
                 bloodStatusDonar.setBackgroundResource(R.drawable.curved_rectangular_red_border);
                 bloodStatusDonar.setTextColor(Color.RED);
+                userInterest="Acceptor";
             }
         });
 
@@ -49,15 +52,28 @@ public class RegistrationBloodgoupActivity extends AppCompatActivity {
                 bloodStatusAcceptor.setTextColor(Color.RED);
                 bloodStatusDonar.setBackgroundResource(R.drawable.curved_rectangular_red_background);
                 bloodStatusDonar.setTextColor(Color.WHITE);
+                userInterest="Donar";
             }
         });
 
         bt_reg_bloodgroup_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(RegistrationBloodgoupActivity.this,RegistrationGenderActivity.class);
-                startActivity(i);
-                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+                if(bloodGroup.equals(""))
+                {
+                    Toast.makeText(RegistrationBloodgoupActivity.this, "Plese Select your blood group", Toast.LENGTH_SHORT).show();
+                }
+                else if(userInterest.equals(""))
+                {
+                    Toast.makeText(RegistrationBloodgoupActivity.this,"Plese select your current interest",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    SplashActivity.bloodGroupFinal=bloodGroup;
+                    SplashActivity.interestFinal=userInterest;
+                    Intent i = new Intent(RegistrationBloodgoupActivity.this, RegistrationGenderActivity.class);
+                    startActivity(i);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                }
             }
         });
 
@@ -72,6 +88,7 @@ public class RegistrationBloodgoupActivity extends AppCompatActivity {
                 ll_b_negative.setBackgroundResource(R.drawable.circular_red_border);
                 ll_ab_negative.setBackgroundResource(R.drawable.circular_red_border);
                 ll_o_negative.setBackgroundResource(R.drawable.circular_red_border);
+                bloodGroup="A+";
             }
         });
 
@@ -86,6 +103,7 @@ public class RegistrationBloodgoupActivity extends AppCompatActivity {
                 ll_b_negative.setBackgroundResource(R.drawable.circular_red_border);
                 ll_ab_negative.setBackgroundResource(R.drawable.circular_red_border);
                 ll_o_negative.setBackgroundResource(R.drawable.circular_red_border);
+                bloodGroup="B+";
             }
         });
 
@@ -100,6 +118,7 @@ public class RegistrationBloodgoupActivity extends AppCompatActivity {
                 ll_b_negative.setBackgroundResource(R.drawable.circular_red_border);
                 ll_ab_negative.setBackgroundResource(R.drawable.circular_red_border);
                 ll_o_negative.setBackgroundResource(R.drawable.circular_red_border);
+                bloodGroup="AB+";
             }
         });
 
@@ -114,6 +133,7 @@ public class RegistrationBloodgoupActivity extends AppCompatActivity {
                 ll_b_negative.setBackgroundResource(R.drawable.circular_red_border);
                 ll_ab_negative.setBackgroundResource(R.drawable.circular_red_border);
                 ll_o_negative.setBackgroundResource(R.drawable.circular_red_border);
+                bloodGroup="O+";
             }
         });
 
@@ -128,6 +148,7 @@ public class RegistrationBloodgoupActivity extends AppCompatActivity {
                 ll_b_negative.setBackgroundResource(R.drawable.circular_red_border);
                 ll_ab_negative.setBackgroundResource(R.drawable.circular_red_border);
                 ll_o_negative.setBackgroundResource(R.drawable.circular_red_border);
+                bloodGroup="A-";
             }
         });
 
@@ -142,6 +163,7 @@ public class RegistrationBloodgoupActivity extends AppCompatActivity {
                 ll_b_negative.setBackgroundResource(R.drawable.circular_select_img);
                 ll_ab_negative.setBackgroundResource(R.drawable.circular_red_border);
                 ll_o_negative.setBackgroundResource(R.drawable.circular_red_border);
+                bloodGroup="B-";
             }
         });
 
@@ -156,6 +178,7 @@ public class RegistrationBloodgoupActivity extends AppCompatActivity {
                 ll_b_negative.setBackgroundResource(R.drawable.circular_red_border);
                 ll_ab_negative.setBackgroundResource(R.drawable.circular_select_img);
                 ll_o_negative.setBackgroundResource(R.drawable.circular_red_border);
+                bloodGroup="AB-";
             }
         });
 
@@ -170,6 +193,7 @@ public class RegistrationBloodgoupActivity extends AppCompatActivity {
                 ll_b_negative.setBackgroundResource(R.drawable.circular_red_border);
                 ll_ab_negative.setBackgroundResource(R.drawable.circular_red_border);
                 ll_o_negative.setBackgroundResource(R.drawable.circular_select_img);
+                bloodGroup="O-";
             }
         });
 

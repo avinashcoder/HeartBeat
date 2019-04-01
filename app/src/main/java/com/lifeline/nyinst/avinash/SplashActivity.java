@@ -7,6 +7,21 @@ import android.os.Bundle;
 
 public class SplashActivity extends AppCompatActivity {
 
+    public static String countryCodeFinal;
+    public static String contactNumberFinal;
+    public static String nameFinal;
+    public static String dateOfBirthFinal;
+    public static String addressFinal;
+    public static double latitudeFinal;
+    public static double longitudeFinal;
+    public static String cityFinal;
+    public static String stateFinal;
+    public static String countryFinal;
+    public static String bloodGroupFinal;
+    public static String interestFinal;
+    public static String genderFinal;
+    public static String userTypeFinal;
+
     private final int SPLASH_DISPLAY_LENGTH = 4000;
 
     @Override
