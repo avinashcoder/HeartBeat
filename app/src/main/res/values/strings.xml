@@ -20,7 +20,7 @@
     <string name="wow">WOW !</string>
     <string name="hey_plese_select_your_location">Hey ! Plese select your location.</string>
     <string name="confirm_your_location_you_can_also_add_your_location_by_tapping_on_the_map_icon">Confirm your location\n You can also add your location by tapping on the map icon</string>
-    <string name="trying_to_get_your_current_location_tap_on_refresh_button_to_get_your_current_location">Trying to get your current location, Tap on the below refresh button to get your current location</string>
+    <string name="trying_to_get_your_current_location_tap_on_refresh_button_to_get_your_current_location">Trying to get your current location, Tap here to add your location from map</string>
     <string name="let_s_go">Let\'s Go</string>
     <string name="get_and_donate_blood_n24_7">Get and donate blood 24/7</string>
     <string name="you_are_currently_interested_for">You are currently interested for ?</string>

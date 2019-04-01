@@ -322,6 +322,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -358,6 +359,7 @@ public class RegistrationLocationActivity extends AppCompatActivity {
 
     TextView txtLocationResult;
     Button btnRegLocationNext;
+    ProgressBar locationProgressBar;
 
     Geocoder geocoder;
     List<Address> addresses;
@@ -394,6 +396,7 @@ public class RegistrationLocationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registration_location);
         txtLocationResult=findViewById(R.id.tv_reg_location);
         btnRegLocationNext=findViewById(R.id.btn_reg_location_next);
+        locationProgressBar=findViewById(R.id.location_progressBar);
 
        geocoder = new Geocoder(this, Locale.getDefault());
 
@@ -485,12 +488,14 @@ public class RegistrationLocationActivity extends AppCompatActivity {
                 postalcode=addresses.get(0).getPostalCode();
 
                 txtLocationResult.setText(address);
+                btnRegLocationNext.setVisibility(View.VISIBLE);
+                locationProgressBar.setVisibility(View.GONE);
 
                 txtLocationResult.setAlpha(0);
                 txtLocationResult.animate().alpha(1).setDuration(300);
 
             }catch (Exception e){
-                Toast.makeText(getApplicationContext(),"Exception Occured"+e,Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Unable to get location, Plese add the address from map"+e,Toast.LENGTH_LONG).show();
             }
 
 //            txtLocationResult.setText(
@@ -529,7 +534,7 @@ public class RegistrationLocationActivity extends AppCompatActivity {
                     public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
                         Log.i(TAG, "All location settings are satisfied.");
 
-                        Toast.makeText(getApplicationContext(), "Started location updates!", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), "Started location updates!", Toast.LENGTH_SHORT).show();
 
                         //noinspection MissingPermission
                         mFusedLocationClient.requestLocationUpdates(mLocationRequest,
@@ -602,7 +607,7 @@ public class RegistrationLocationActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(getApplicationContext(), "Location updates stopped!", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), "Location updates stopped!", Toast.LENGTH_SHORT).show();
                     }
                 });
     }

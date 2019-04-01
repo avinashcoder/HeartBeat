@@ -64,11 +64,17 @@ public class MobileVerificationActivity extends AppCompatActivity {
                     OTP = GenerateOTP();
                 }
 
-                URL="http://control.msg91.com/api/sendotp.php?otp_length=4&authkey=266493ATTdZz7uWMZ5c8255e9&message=Verification code for LifeLine Get and Donate Blood is "+OTP+"&sender=LIFELN&mobile="+countryCode+contactNo+"&otp="+OTP;
+                URL="http://control.msg91.com/api/sendotp.php?otp_length=4&authkey=266493ATTdZz7uWMZ5c8255e9&message=Verification code to get connect with LifeLine is "+OTP+"&sender=LIFELN&mobile="+countryCode+contactNo+"&otp="+OTP;
                 sendOtp();
 
 //                mob_linear_layout.setVisibility(View.GONE);
 //                otp_linear_layout.setVisibility(View.VISIBLE);
+//                new Handler().postDelayed(new Runnable(){
+//                    @Override
+//                    public void run() {
+//                        et_otp.setText(OTP);
+//                    }
+//                }, 3000);
 
 
 
@@ -160,14 +166,7 @@ public class MobileVerificationActivity extends AppCompatActivity {
                     progressBar.setVisibility(View.INVISIBLE);
                     bt_send_otp.setVisibility(View.VISIBLE);
             }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-
-                return params;
-            }
-        };
+        });
 
 
         RequestQueue requestQueue = Volley.newRequestQueue(MobileVerificationActivity.this);

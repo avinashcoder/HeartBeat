@@ -30,6 +30,9 @@ public class RegistrationGenderActivity extends AppCompatActivity {
         regGenderNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent i=new Intent(RegistrationGenderActivity.this,HomeActivity.class);
+                startActivity(i);
+                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
             }
         });
 

@@ -21,147 +21,150 @@
             android:src="@drawable/lifelinelogo"
             android:contentDescription="@string/lifeline" />
 
-
-        <LinearLayout
-            android:id="@+id/mobile_layout"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
             <LinearLayout
+                android:id="@+id/mobile_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="60dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:orientation="horizontal"
-                android:weightSum="13">
+                android:layout_marginTop="60dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="13">
+
+                    <EditText
+                        android:id="@+id/ed_country_code"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="2"
+                        android:background="#00000000"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="1dp"
+                        android:text="@string/_91"
+                        android:textColor="#FFFFFF"
+                        android:inputType="numberSigned"
+                        android:textSize="20sp" />
+
+                    <EditText
+                        android:id="@+id/ed_mob_no"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_weight="10"
+                        android:background="#00000000"
+                        android:hint="@string/enter_mobile_number"
+                        android:inputType="number"
+                        android:maxEms="10"
+                        android:paddingStart="1dp"
+                        android:textColor="#FFFFFF"
+                        android:textColorHint="#FFFFFF"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginRight="50dp"
+                    android:background="#FFF" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:gravity="center">
+
+                    <Button
+                        android:id="@+id/btn_send_otp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/circular_corner_button"
+                        android:paddingLeft="30dp"
+                        android:paddingTop="5dp"
+                        android:paddingRight="30dp"
+                        android:paddingBottom="5dp"
+                        android:text="@string/send_otp"
+                        android:textColor="#F44336"
+                        android:textSize="18sp" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBar"
+                        style="?android:attr/progressBarStyle"
+                        android:layout_width="wrap_content"
+                        android:visibility="gone"
+                        android:layout_gravity="center"
+                        android:indeterminateDrawable="@drawable/progressbar"
+                        android:layout_height="wrap_content" />
+
+                </FrameLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/otp_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginTop="60dp"
+                android:orientation="vertical">
+
 
                 <EditText
-                    android:id="@+id/ed_country_code"
-                    android:layout_width="0dp"
+                    android:id="@+id/ed_otp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:layout_weight="2"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="60dp"
                     android:background="#00000000"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="1dp"
-                    android:text="@string/_91"
-                    android:textColor="#FFFFFF"
-                    android:inputType="numberSigned"
-                    android:textSize="20sp" />
-
-                <EditText
-                    android:id="@+id/ed_mob_no"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_weight="10"
-                    android:background="#00000000"
-                    android:hint="@string/enter_mobile_number"
+                    android:gravity="center"
+                    android:hint="@string/enter_otp"
                     android:inputType="number"
-                    android:maxEms="10"
-                    android:paddingStart="1dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
                     android:textColor="#FFFFFF"
                     android:textColorHint="#FFFFFF"
                     android:textSize="20sp" />
-            </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginTop="1dp"
-                android:layout_marginRight="50dp"
-                android:background="#FFF" />
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_gravity="center"
-                android:gravity="center">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginLeft="100dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginRight="100dp"
+                    android:background="#FFF" />
 
                 <Button
-                    android:id="@+id/btn_send_otp"
+                    android:id="@+id/btn_verify_otp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginTop="40dp"
                     android:background="@drawable/circular_corner_button"
                     android:paddingLeft="30dp"
                     android:paddingTop="5dp"
                     android:paddingRight="30dp"
                     android:paddingBottom="5dp"
-                    android:text="@string/send_otp"
+                    android:text="@string/verify_now"
                     android:textColor="#F44336"
                     android:textSize="18sp" />
-
-                <ProgressBar
-                    android:id="@+id/progressBar"
-                    style="?android:attr/progressBarStyle"
-                    android:layout_width="wrap_content"
-                    android:visibility="gone"
-                    android:layout_gravity="center"
-                    android:indeterminateDrawable="@drawable/progressbar"
-                    android:layout_height="wrap_content" />
-
-            </FrameLayout>
+            </LinearLayout>
 
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/otp_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:layout_marginTop="60dp"
-            android:orientation="vertical">
-
-
-            <EditText
-                android:id="@+id/ed_otp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="60dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="60dp"
-                android:background="#00000000"
-                android:gravity="center"
-                android:hint="@string/enter_otp"
-                android:inputType="number"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:textColor="#FFFFFF"
-                android:textColorHint="#FFFFFF"
-                android:textSize="20sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginLeft="100dp"
-                android:layout_marginTop="1dp"
-                android:layout_marginRight="100dp"
-                android:background="#FFF" />
-
-            <Button
-                android:id="@+id/btn_verify_otp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="40dp"
-                android:background="@drawable/circular_corner_button"
-                android:paddingLeft="30dp"
-                android:paddingTop="5dp"
-                android:paddingRight="30dp"
-                android:paddingBottom="5dp"
-                android:text="@string/verify_now"
-                android:textColor="#F44336"
-                android:textSize="18sp" />
-        </LinearLayout>
-
-
-
+        </FrameLayout>
 
     </LinearLayout>
 
