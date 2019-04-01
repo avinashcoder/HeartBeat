@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "486266049412",
+    "firebase_url": "https://lifeline-b827c.firebaseio.com",
+    "project_id": "lifeline-b827c",
+    "storage_bucket": "lifeline-b827c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486266049412:android:dd0090ba51277158",
+        "android_client_info": {
+          "package_name": "com.heartbeat.nyinst.avinash"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486266049412-8gjt8df30qj796eb2kdk5s577b34v3m0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.heartbeat.nyinst.avinash",
+            "certificate_hash": "917e2f01c2615a9d185b9873bee9f01dfd621354"
+          }
+        },
+        {
+          "client_id": "486266049412-gschge4gedepcfbgmhqf44s4800qqnp0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABoiKbnOej6Aqx9FBSu9888X_UrLoE6lU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486266049412-gschge4gedepcfbgmhqf44s4800qqnp0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
