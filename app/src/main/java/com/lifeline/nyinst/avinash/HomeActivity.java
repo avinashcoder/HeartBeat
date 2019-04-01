@@ -9,20 +9,36 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 public class HomeActivity extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     ActionBarDrawerToggle actionBarDrawerToggle;
-
+    ImageView profilepic,bloodGroup;
+    TextView userName,address;
+    String name,addressvalue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        profilepic=findViewById(R.id.nav_drawer_user_profile_pic);
+        bloodGroup=findViewById(R.id.nav_drawer_user_blood_group);
+        userName=findViewById(R.id.nav_drawer_user_name);
+        address=findViewById(R.id.nav_drawer_user_address);
 
+        name=SplashActivity.nameFinal;
+        addressvalue=SplashActivity.addressFinal;
         setUpToolBar();
 
+
+    }
+
+    private void updateHomeLayout() {
+        userName.setText(name);
+        address.setText(addressvalue);
     }
 
     private  void setUpToolBar(){

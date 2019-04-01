@@ -55,28 +55,37 @@ public class MobileVerificationActivity extends AppCompatActivity {
         bt_send_otp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressBar.setVisibility(View.VISIBLE);
-                bt_send_otp.setVisibility(View.INVISIBLE);
-
-                countryCode=et_country_code.getText().toString();
-                contactNo= et_mob_no.getText().toString();
-                if(OTP.equals("")) {
-                    OTP = GenerateOTP();
+                if(et_mob_no.getText().toString().equals(""))
+                {
+                    Toast.makeText(MobileVerificationActivity.this,"Plese enter your contact no to continue",Toast.LENGTH_SHORT).show();
                 }
+                else if(et_mob_no.getText().length()<5)
+                {
+                    Toast.makeText(MobileVerificationActivity.this,"Plese enter a valid contact number",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    progressBar.setVisibility(View.VISIBLE);
+                    bt_send_otp.setVisibility(View.INVISIBLE);
 
-                URL="http://control.msg91.com/api/sendotp.php?otp_length=4&authkey=266493ATTdZz7uWMZ5c8255e9&message=Verification code to get connect with LifeLine is "+OTP+"&sender=LIFELN&mobile="+countryCode+contactNo+"&otp="+OTP;
-                //sendOtp();
-
-                mob_linear_layout.setVisibility(View.GONE);
-                otp_linear_layout.setVisibility(View.VISIBLE);
-                new Handler().postDelayed(new Runnable(){
-                    @Override
-                    public void run() {
-                        et_otp.setText(OTP);
+                    countryCode = et_country_code.getText().toString();
+                    contactNo = et_mob_no.getText().toString();
+                    if (OTP.equals("")) {
+                        OTP = GenerateOTP();
                     }
-                }, 3000);
 
+                    URL = "http://control.msg91.com/api/sendotp.php?otp_length=4&authkey=266493ATTdZz7uWMZ5c8255e9&message=Verification code to get connect with LifeLine is " + OTP + "&sender=LIFELN&mobile=" + countryCode + contactNo + "&otp=" + OTP;
+                    sendOtp();
 
+//                    mob_linear_layout.setVisibility(View.GONE);
+//                    otp_linear_layout.setVisibility(View.VISIBLE);
+//                    new Handler().postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            et_otp.setText(OTP);
+//                        }
+//                    }, 3000);
+
+                }
 
             }
         });
@@ -86,7 +95,8 @@ public class MobileVerificationActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(et_otp.getText().toString().equals(OTP)) {
                     Toast.makeText(getApplicationContext(),"OTP Verified Successfully",Toast.LENGTH_SHORT).show();
-
+                    SplashActivity.contactNumberFinal=contactNo;
+                    SplashActivity.countryCodeFinal=countryCode;
                     Intent intent = new Intent(MobileVerificationActivity.this, RegistrationNameActivity.class);
                     startActivity(intent);
                     finish();

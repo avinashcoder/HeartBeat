@@ -76,11 +76,11 @@ public class RegistrationNameActivity extends AppCompatActivity {
         bt_reg_name_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(et_name.getText().equals(""))
+                if(et_name.getText().toString().equals(""))
                 {
                     Toast.makeText(getApplicationContext(),"Plese Enter Your Name",Toast.LENGTH_SHORT).show();
                 }
-                else if(et_birthday.getText().equals(""))
+                else if(et_birthday.getText().toString().equals(""))
                 {
                     Toast.makeText(getApplicationContext(),"Plese Enter Your Birthday",Toast.LENGTH_SHORT).show();
                 }
