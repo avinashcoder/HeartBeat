@@ -29,16 +29,9 @@ public class HomeActivity extends AppCompatActivity {
         userName=findViewById(R.id.nav_drawer_user_name);
         address=findViewById(R.id.nav_drawer_user_address);
 
-        name=SplashActivity.nameFinal;
-        addressvalue=SplashActivity.addressFinal;
         setUpToolBar();
 
 
-    }
-
-    private void updateHomeLayout() {
-        userName.setText(name);
-        address.setText(addressvalue);
     }
 
     private  void setUpToolBar(){

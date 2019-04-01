@@ -478,8 +478,6 @@ public class RegistrationLocationActivity extends AppCompatActivity {
         if (mCurrentLocation != null) {
             latitude=mCurrentLocation.getLatitude();
             longitude=mCurrentLocation.getLongitude();
-            SplashActivity.latitudeFinal=latitude;
-            SplashActivity.longitudeFinal=longitude;
 
             try
             {
@@ -492,11 +490,6 @@ public class RegistrationLocationActivity extends AppCompatActivity {
                 postalcode=addresses.get(0).getPostalCode();
 
                 txtLocationResult.setText(address);
-
-                SplashActivity.addressFinal=address;
-                SplashActivity.cityFinal=area;
-                SplashActivity.stateFinal=city;
-                SplashActivity.countryFinal=country;
 
                 btnRegLocationNext.setVisibility(View.VISIBLE);
                 locationProgressBar.setVisibility(View.GONE);

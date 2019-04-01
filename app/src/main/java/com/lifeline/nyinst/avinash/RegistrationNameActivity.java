@@ -85,8 +85,6 @@ public class RegistrationNameActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Plese Enter Your Birthday",Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    SplashActivity.nameFinal=et_name.getText().toString();
-                    SplashActivity.dateOfBirthFinal=et_birthday.getText().toString();
                     Intent i = new Intent(RegistrationNameActivity.this, RegistrationLocationActivity.class);
                     startActivity(i);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

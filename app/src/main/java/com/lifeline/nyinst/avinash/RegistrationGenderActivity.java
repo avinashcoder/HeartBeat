@@ -41,8 +41,6 @@ public class RegistrationGenderActivity extends AppCompatActivity {
                     Toast.makeText(RegistrationGenderActivity.this,"Plese tell us your category",Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    SplashActivity.genderFinal=gender;
-                    SplashActivity.userTypeFinal=userType;
                     Intent i = new Intent(RegistrationGenderActivity.this, HomeActivity.class);
                     startActivity(i);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

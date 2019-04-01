@@ -95,8 +95,7 @@ public class MobileVerificationActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(et_otp.getText().toString().equals(OTP)) {
                     Toast.makeText(getApplicationContext(),"OTP Verified Successfully",Toast.LENGTH_SHORT).show();
-                    SplashActivity.contactNumberFinal=contactNo;
-                    SplashActivity.countryCodeFinal=countryCode;
+
                     Intent intent = new Intent(MobileVerificationActivity.this, RegistrationNameActivity.class);
                     startActivity(intent);
                     finish();

@@ -68,8 +68,6 @@ public class RegistrationBloodgoupActivity extends AppCompatActivity {
                     Toast.makeText(RegistrationBloodgoupActivity.this,"Plese select your current interest",Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    SplashActivity.bloodGroupFinal=bloodGroup;
-                    SplashActivity.interestFinal=userInterest;
                     Intent i = new Intent(RegistrationBloodgoupActivity.this, RegistrationGenderActivity.class);
                     startActivity(i);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
