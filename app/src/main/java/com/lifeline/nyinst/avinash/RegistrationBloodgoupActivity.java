@@ -1,6 +1,8 @@
 package com.lifeline.nyinst.avinash;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,12 +12,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import static com.lifeline.nyinst.avinash.SplashActivity.bloodGroupFinal;
+import static com.lifeline.nyinst.avinash.SplashActivity.contactNumberFinal;
+import static com.lifeline.nyinst.avinash.SplashActivity.myPreferences;
+import static com.lifeline.nyinst.avinash.SplashActivity.userInterestFinal;
+
 public class RegistrationBloodgoupActivity extends AppCompatActivity {
 
     LinearLayout ll_a_positive,ll_b_positive,ll_ab_positive,ll_o_positive,ll_a_negative,ll_b_negative,ll_ab_negative,ll_o_negative;
     Button bt_reg_bloodgroup_next;
     TextView bloodStatusDonar,bloodStatusAcceptor;
     String bloodGroup="",userInterest="";
+    SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +76,11 @@ public class RegistrationBloodgoupActivity extends AppCompatActivity {
                     Toast.makeText(RegistrationBloodgoupActivity.this,"Plese select your current interest",Toast.LENGTH_SHORT).show();
                 }
                 else {
+                    sharedPreferences=getSharedPreferences(myPreferences, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor=sharedPreferences.edit();
+                    editor.putString(bloodGroupFinal,bloodGroup);
+                    editor.putString(userInterestFinal,userInterest);
+                    editor.commit();
                     Intent i = new Intent(RegistrationBloodgoupActivity.this, RegistrationGenderActivity.class);
                     startActivity(i);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

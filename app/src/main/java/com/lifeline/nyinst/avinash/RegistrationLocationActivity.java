@@ -306,8 +306,10 @@ package com.lifeline.nyinst.avinash;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -353,6 +355,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import static com.lifeline.nyinst.avinash.SplashActivity.addressFinal;
+import static com.lifeline.nyinst.avinash.SplashActivity.myPreferences;
+
 public class RegistrationLocationActivity extends AppCompatActivity {
 
     private static final String TAG = RegistrationLocationActivity.class.getSimpleName();
@@ -390,6 +395,8 @@ public class RegistrationLocationActivity extends AppCompatActivity {
     // boolean flag to toggle the ui
     private Boolean mRequestingLocationUpdates;
 
+    SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -405,6 +412,10 @@ public class RegistrationLocationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(!address.equals("")) {
+                    sharedPreferences=getSharedPreferences(myPreferences, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor=sharedPreferences.edit();
+                    editor.putString(addressFinal,address);
+                    editor.commit();
                     Intent i = new Intent(RegistrationLocationActivity.this, RegistrationBloodgoupActivity.class);
                     startActivity(i);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

@@ -1,8 +1,10 @@
 package com.lifeline.nyinst.avinash;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -22,6 +24,10 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+import static com.lifeline.nyinst.avinash.SplashActivity.dobFinal;
+import static com.lifeline.nyinst.avinash.SplashActivity.myPreferences;
+import static com.lifeline.nyinst.avinash.SplashActivity.nameFinal;
+
 public class RegistrationNameActivity extends AppCompatActivity {
 
     EditText et_name,et_birthday;
@@ -30,6 +36,7 @@ public class RegistrationNameActivity extends AppCompatActivity {
     private final int IMG_REQUEST = 1;
     private Bitmap bitmap;
     final Calendar myCalendar = Calendar.getInstance();
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +92,13 @@ public class RegistrationNameActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Plese Enter Your Birthday",Toast.LENGTH_SHORT).show();
                 }
                 else {
+                    String name=et_name.getText().toString();
+                    String birthday=et_birthday.getText().toString();
+                    sharedPreferences=getSharedPreferences(myPreferences, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor=sharedPreferences.edit();
+                    editor.putString(nameFinal,name);
+                    editor.putString(dobFinal,birthday);
+                    editor.commit();
                     Intent i = new Intent(RegistrationNameActivity.this, RegistrationLocationActivity.class);
                     startActivity(i);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

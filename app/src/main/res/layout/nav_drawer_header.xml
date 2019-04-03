@@ -33,9 +33,12 @@
         android:layout_height="wrap_content"
         android:text="Address of the User"
         android:layout_gravity="bottom|center"
+        android:gravity="center"
         android:textSize="10sp"
         android:textColor="#FFF"
-        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="10dp"
         android:drawableLeft="@drawable/ic_action_location_white"
         android:layout_marginTop="35dp"/>
 

@@ -1,6 +1,8 @@
 package com.lifeline.nyinst.avinash;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,11 +10,18 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import static com.lifeline.nyinst.avinash.SplashActivity.bloodGroupFinal;
+import static com.lifeline.nyinst.avinash.SplashActivity.genderFinal;
+import static com.lifeline.nyinst.avinash.SplashActivity.myPreferences;
+import static com.lifeline.nyinst.avinash.SplashActivity.userInterestFinal;
+import static com.lifeline.nyinst.avinash.SplashActivity.userTypeFinal;
+
 public class RegistrationGenderActivity extends AppCompatActivity {
 
     ImageView genderMale,genderFemale,individual,bloodBank,doctor,genderMaleMark,genderFemaleMark,individualMark,bloodBankMark,doctorMark;
     Button regGenderNext;
     String gender="",userType="";
+    SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +50,11 @@ public class RegistrationGenderActivity extends AppCompatActivity {
                     Toast.makeText(RegistrationGenderActivity.this,"Plese tell us your category",Toast.LENGTH_SHORT).show();
                 }
                 else {
+                    sharedPreferences=getSharedPreferences(myPreferences, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor=sharedPreferences.edit();
+                    editor.putString(genderFinal,gender);
+                    editor.putString(userTypeFinal,userType);
+                    editor.commit();
                     Intent i = new Intent(RegistrationGenderActivity.this, HomeActivity.class);
                     startActivity(i);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

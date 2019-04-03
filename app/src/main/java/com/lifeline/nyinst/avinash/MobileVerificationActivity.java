@@ -1,11 +1,13 @@
 package com.lifeline.nyinst.avinash;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,7 +15,6 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -21,9 +22,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
+
+import static com.lifeline.nyinst.avinash.SplashActivity.contactNumberFinal;
+import static com.lifeline.nyinst.avinash.SplashActivity.countryCodeFinal;
+import static com.lifeline.nyinst.avinash.SplashActivity.myPreferences;
 
 public class MobileVerificationActivity extends AppCompatActivity {
     EditText et_country_code,et_mob_no,et_otp;
@@ -34,10 +37,14 @@ public class MobileVerificationActivity extends AppCompatActivity {
     String URL;
     ProgressBar progressBar;
 
+    SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mobile_verification);
+
+
 
         et_country_code=findViewById(R.id.ed_country_code);
         et_mob_no=findViewById(R.id.ed_mob_no);
@@ -94,6 +101,13 @@ public class MobileVerificationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(et_otp.getText().toString().equals(OTP)) {
+
+                    sharedPreferences=getSharedPreferences(myPreferences, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor=sharedPreferences.edit();
+                    editor.putString(contactNumberFinal,contactNo);
+                    editor.putString(countryCodeFinal,countryCode);
+                    editor.commit();
+
                     Toast.makeText(getApplicationContext(),"OTP Verified Successfully",Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(MobileVerificationActivity.this, RegistrationNameActivity.class);
