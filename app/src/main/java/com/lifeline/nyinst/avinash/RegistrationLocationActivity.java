@@ -306,8 +306,10 @@ package com.lifeline.nyinst.avinash;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -387,6 +389,8 @@ public class RegistrationLocationActivity extends AppCompatActivity {
     private LocationCallback mLocationCallback;
     private Location mCurrentLocation;
 
+    SharedPreferences sharedPreferences;
+
     // boolean flag to toggle the ui
     private Boolean mRequestingLocationUpdates;
 
@@ -405,6 +409,10 @@ public class RegistrationLocationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(!address.equals("")) {
+                    sharedPreferences=getSharedPreferences("lifelinePref", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor=sharedPreferences.edit();
+                    editor.putString("addressKey",address);
+                    editor.commit();
                     Intent i = new Intent(RegistrationLocationActivity.this, RegistrationBloodgoupActivity.class);
                     startActivity(i);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

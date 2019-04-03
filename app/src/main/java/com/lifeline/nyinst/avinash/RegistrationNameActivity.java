@@ -1,8 +1,10 @@
 package com.lifeline.nyinst.avinash;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -30,6 +32,7 @@ public class RegistrationNameActivity extends AppCompatActivity {
     private final int IMG_REQUEST = 1;
     private Bitmap bitmap;
     final Calendar myCalendar = Calendar.getInstance();
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +79,8 @@ public class RegistrationNameActivity extends AppCompatActivity {
         bt_reg_name_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String name=et_name.getText().toString();
+                String birthday=et_birthday.getText().toString();
                 if(et_name.getText().toString().equals(""))
                 {
                     Toast.makeText(getApplicationContext(),"Plese Enter Your Name",Toast.LENGTH_SHORT).show();
@@ -85,6 +90,11 @@ public class RegistrationNameActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Plese Enter Your Birthday",Toast.LENGTH_SHORT).show();
                 }
                 else {
+                    sharedPreferences=getSharedPreferences("lifelinePref", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor=sharedPreferences.edit();
+                    editor.putString("nameKey",name);
+                    editor.putString("birthdayKey",birthday);
+                    editor.commit();
                     Intent i = new Intent(RegistrationNameActivity.this, RegistrationLocationActivity.class);
                     startActivity(i);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
