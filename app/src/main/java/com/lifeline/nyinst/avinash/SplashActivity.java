@@ -20,6 +20,11 @@ public class SplashActivity extends AppCompatActivity {
     public static final String userInterestFinal="userInterestKey";
     public static final String genderFinal="genderKey";
     public static final String userTypeFinal="userTypeKey";
+    public static final String cityFinal="cityKey";
+    public static final String stateFinal="stateKey";
+    public static final String countryFinal="countryFinal";
+    public static final String latitudeFinal="latitudeKey";
+    public static final String longitudeFinal="longitudeKey";
 
     private final int SPLASH_DISPLAY_LENGTH = 3000;
 

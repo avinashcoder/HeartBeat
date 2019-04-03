@@ -356,7 +356,12 @@ import java.util.List;
 import java.util.Locale;
 
 import static com.lifeline.nyinst.avinash.SplashActivity.addressFinal;
+import static com.lifeline.nyinst.avinash.SplashActivity.cityFinal;
+import static com.lifeline.nyinst.avinash.SplashActivity.countryFinal;
+import static com.lifeline.nyinst.avinash.SplashActivity.latitudeFinal;
+import static com.lifeline.nyinst.avinash.SplashActivity.longitudeFinal;
 import static com.lifeline.nyinst.avinash.SplashActivity.myPreferences;
+import static com.lifeline.nyinst.avinash.SplashActivity.stateFinal;
 
 public class RegistrationLocationActivity extends AppCompatActivity {
 
@@ -369,7 +374,7 @@ public class RegistrationLocationActivity extends AppCompatActivity {
     Geocoder geocoder;
     List<Address> addresses;
     Double latitude, longitude;
-    String address="", area, city, country, postalcode;
+    String address="", city, state, country, postalcode;
 
     private String mLastUpdateTime;
 
@@ -415,6 +420,11 @@ public class RegistrationLocationActivity extends AppCompatActivity {
                     sharedPreferences=getSharedPreferences(myPreferences, Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor=sharedPreferences.edit();
                     editor.putString(addressFinal,address);
+                    editor.putString(cityFinal,city);
+                    editor.putString(stateFinal,state);
+                    editor.putString(countryFinal,country);
+                    editor.putString(latitudeFinal,String.valueOf(latitude));
+                    editor.putString(longitudeFinal,String.valueOf(longitude));
                     editor.commit();
                     Intent i = new Intent(RegistrationLocationActivity.this, RegistrationBloodgoupActivity.class);
                     startActivity(i);
@@ -495,8 +505,8 @@ public class RegistrationLocationActivity extends AppCompatActivity {
                 addresses = geocoder.getFromLocation(latitude,longitude,1);
 
                 address=addresses.get(0).getAddressLine(0);
-                area=addresses.get(0).getLocality();
-                city=addresses.get(0).getAdminArea();
+                city=addresses.get(0).getLocality();
+                state=addresses.get(0).getAdminArea();
                 country=addresses.get(0).getCountryName();
                 postalcode=addresses.get(0).getPostalCode();
 
