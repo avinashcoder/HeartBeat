@@ -15,7 +15,8 @@
         android:roundIcon="@drawable/lifelinelogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HomeActivity"></activity>
+        <activity android:name=".DonarListActivity"></activity>
+        <activity android:name=".HomeActivity" />
         <activity android:name=".RegistrationGenderActivity" />
         <activity android:name=".RegistrationLocationActivity" />
         <activity android:name=".RegistrationBloodgoupActivity" />

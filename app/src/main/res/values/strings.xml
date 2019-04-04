@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LifeLine</string>
+    <string name="app_name">LIFELINE</string>
 
     <string name="and">  <![CDATA[&]]> </string>
     <string name="problems_signing_in"><u>Having Problems Signing In ?</u></string>
@@ -12,10 +12,10 @@
     <string name="terms_of_service">Terms of Service</string>
     <string name="enter_otp">Enter OTP</string>
     <string name="send_otp">SEND OTP</string>
-    <string name="enter_mobile_number">Enter Mobile Number</string>
+    <string name="enter_mobile_number">Mobile Number</string>
     <string name="_91">+91</string>
     <string name="lifeline">LifeLine</string>
-    <string name="donate_blood_save_life">Donate Blood, Save Life</string>
+    <string name="donate_blood_save_life">"Donate Blood • Save Life"</string>
     <string name="what_is_your_blood_group">What is your blood group ?</string>
     <string name="wow">WOW !</string>
     <string name="hey_plese_select_your_location">Hey ! Plese select your location.</string>

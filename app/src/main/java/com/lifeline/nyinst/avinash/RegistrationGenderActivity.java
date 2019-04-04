@@ -25,6 +25,7 @@ import static com.lifeline.nyinst.avinash.SplashActivity.addressFinal;
 import static com.lifeline.nyinst.avinash.SplashActivity.bloodGroupFinal;
 import static com.lifeline.nyinst.avinash.SplashActivity.cityFinal;
 import static com.lifeline.nyinst.avinash.SplashActivity.contactNumberFinal;
+import static com.lifeline.nyinst.avinash.SplashActivity.countryCodeFinal;
 import static com.lifeline.nyinst.avinash.SplashActivity.countryFinal;
 import static com.lifeline.nyinst.avinash.SplashActivity.dobFinal;
 import static com.lifeline.nyinst.avinash.SplashActivity.genderFinal;
@@ -80,6 +81,8 @@ public class RegistrationGenderActivity extends AppCompatActivity {
                     retriveSharedPreferenceData();
                     registerUser();
                     Intent i = new Intent(RegistrationGenderActivity.this, HomeActivity.class);
+                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(i);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 }
@@ -185,8 +188,8 @@ public class RegistrationGenderActivity extends AppCompatActivity {
 
     private void retriveSharedPreferenceData(){
         sharedPreferences=getSharedPreferences(myPreferences, Context.MODE_PRIVATE);
-        if(sharedPreferences.contains(countryCode)){
-            countryCode=sharedPreferences.getString(countryCode,"countrycode");
+        if(sharedPreferences.contains(countryCodeFinal)){
+            countryCode=sharedPreferences.getString(countryCodeFinal,"countrycode");
         }
         if(sharedPreferences.contains(contactNumberFinal)){
             contactNumber=sharedPreferences.getString(contactNumberFinal,"Contact");

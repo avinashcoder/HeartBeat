@@ -6,30 +6,58 @@
     android:background="#F44336"
     tools:context=".MobileVerificationActivity">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:orientation="horizontal"
+        android:background="@drawable/bottom_curved_rectangle_white">
+        <ImageView
+            android:id="@+id/mobile_verification_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_action_back_arrow_red"
+            android:layout_marginLeft="16dp"
+            android:visibility="gone"
+            android:layout_marginTop="16dp"/>
+
+        <ImageView
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="top|center"
+            android:src="@drawable/booddonationlogo"
+            android:contentDescription="@string/lifeline" />
+
+    </FrameLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingBottom="80dp"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            android:padding="20dp"
-            android:layout_gravity="top|center"
-            android:src="@drawable/lifelinelogo"
-            android:contentDescription="@string/lifeline" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginRight="50dp"
+            android:gravity="center"
+            android:text="To create an account or sign in, use your phone number"
+            android:textColor="#FFF"
+            android:textSize="16sp" />
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp">
 
             <LinearLayout
                 android:id="@+id/mobile_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -48,11 +76,11 @@
                         android:layout_marginEnd="10dp"
                         android:layout_weight="2"
                         android:background="#00000000"
+                        android:inputType="numberSigned"
                         android:paddingStart="10dp"
                         android:paddingEnd="1dp"
                         android:text="@string/_91"
                         android:textColor="#FFFFFF"
-                        android:inputType="numberSigned"
                         android:textSize="20sp" />
 
                     <EditText
@@ -103,10 +131,10 @@
                         android:id="@+id/progressBar"
                         style="?android:attr/progressBarStyle"
                         android:layout_width="wrap_content"
-                        android:visibility="gone"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:indeterminateDrawable="@drawable/progressbar"
-                        android:layout_height="wrap_content" />
+                        android:visibility="gone" />
 
                 </FrameLayout>
 
@@ -117,9 +145,8 @@
                 android:id="@+id/otp_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:layout_marginTop="60dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
 
                 <EditText
@@ -152,7 +179,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="25dp"
                     android:background="@drawable/circular_corner_button"
                     android:paddingLeft="30dp"
                     android:paddingTop="5dp"
@@ -175,6 +202,12 @@
         android:layout_marginBottom="10dp"
         android:gravity="center"
         android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginBottom="5dp"
+            android:background="#FFF" />
 
         <TextView
             android:layout_width="wrap_content"

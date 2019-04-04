@@ -519,7 +519,8 @@ public class RegistrationLocationActivity extends AppCompatActivity {
                 txtLocationResult.animate().alpha(1).setDuration(300);
 
             }catch (Exception e){
-                Toast.makeText(getApplicationContext(),"Unable to get location, Plese add the address from map"+e,Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Unable to get location, Please check your connection or update location from the map"+e,Toast.LENGTH_LONG).show();
+                txtLocationResult.setText("Problem in getting your current location, Please update it from map by clicking here");
             }
 
 //            txtLocationResult.setText(

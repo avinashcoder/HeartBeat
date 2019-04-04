@@ -126,7 +126,6 @@ public class HomeActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         actionBarDrawerToggle=new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.app_name,R.string.app_name);
         toolbar.setTitle("LIFELINE");
-        toolbar.setSubtitle("Get & Donate blood 24/7");
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
     }
@@ -221,7 +220,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
-            super.onBackPressed();
+            super.finish();
             return;
         }
 

@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -36,6 +37,7 @@ public class MobileVerificationActivity extends AppCompatActivity {
     String contactNo,countryCode;
     String URL;
     ProgressBar progressBar;
+    ImageView imgBackBtn;
 
     SharedPreferences sharedPreferences;
 
@@ -53,11 +55,24 @@ public class MobileVerificationActivity extends AppCompatActivity {
 
         et_otp=findViewById(R.id.ed_otp);
         bt_verify_otp=findViewById(R.id.btn_verify_otp);
+        imgBackBtn=findViewById(R.id.mobile_verification_back);
 
         mob_linear_layout=findViewById(R.id.mobile_layout);
         otp_linear_layout=findViewById(R.id.otp_layout);
 
         otp_linear_layout.setVisibility(View.GONE);
+
+        imgBackBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                otp_linear_layout.setVisibility(View.GONE);
+                mob_linear_layout.setVisibility(View.VISIBLE);
+                et_otp.setText("");
+                imgBackBtn.setVisibility(View.GONE);
+                bt_send_otp.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
+            }
+        });
 
         bt_send_otp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +98,7 @@ public class MobileVerificationActivity extends AppCompatActivity {
                     URL = "http://control.msg91.com/api/sendotp.php?otp_length=4&authkey=266493ATTdZz7uWMZ5c8255e9&message=Verification code to get connect with LifeLine is " + OTP + "&sender=LIFELN&mobile=" + countryCode + contactNo + "&otp=" + OTP;
                     sendOtp();
 
+//                    imgBackBtn.setVisibility(View.VISIBLE);
 //                    mob_linear_layout.setVisibility(View.GONE);
 //                    otp_linear_layout.setVisibility(View.VISIBLE);
 //                    new Handler().postDelayed(new Runnable() {
@@ -113,7 +129,7 @@ public class MobileVerificationActivity extends AppCompatActivity {
                     Intent intent = new Intent(MobileVerificationActivity.this, RegistrationNameActivity.class);
                     startActivity(intent);
                     finish();
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
 
                 }
@@ -168,8 +184,9 @@ public class MobileVerificationActivity extends AppCompatActivity {
                         public void run() {
                             mob_linear_layout.setVisibility(View.GONE);
                             otp_linear_layout.setVisibility(View.VISIBLE);
-                            progressBar.setVisibility(View.INVISIBLE);
+                            progressBar.setVisibility(View.GONE);
                             bt_send_otp.setVisibility(View.VISIBLE);
+                            imgBackBtn.setVisibility(View.VISIBLE);
                         }
                     }, 2000);
 
