@@ -6,8 +6,12 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,7 +20,9 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.OvershootInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -28,12 +34,10 @@ import android.widget.Toast;
 import static com.lifeline.nyinst.avinash.SplashActivity.addressFinal;
 import static com.lifeline.nyinst.avinash.SplashActivity.bloodGroupFinal;
 import static com.lifeline.nyinst.avinash.SplashActivity.contactNumberFinal;
-import static com.lifeline.nyinst.avinash.SplashActivity.dobFinal;
-import static com.lifeline.nyinst.avinash.SplashActivity.genderFinal;
 import static com.lifeline.nyinst.avinash.SplashActivity.myPreferences;
 import static com.lifeline.nyinst.avinash.SplashActivity.nameFinal;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     DrawerLayout drawerLayout;
     Toolbar toolbar;
@@ -47,7 +51,8 @@ public class HomeActivity extends AppCompatActivity {
     EditText editTextPost;
     String postText;
     ProgressBar progressBar;
-
+    FloatingActionButton fabDonateBlood,fabAcceptBlood,fabExpand;
+    int fabExpandCheck=0;
 
     private final int IMG_REQUEST = 1;
 
@@ -62,6 +67,11 @@ public class HomeActivity extends AppCompatActivity {
         address=headerView.findViewById(R.id.nav_drawer_user_address);
         profileImgView=headerView.findViewById(R.id.nav_drawer_user_profile_pic);
         bloodGroupImgView=headerView.findViewById(R.id.nav_drawer_user_blood_group);
+        fabDonateBlood=findViewById(R.id.home_fab_donate_blood);
+        fabAcceptBlood=findViewById(R.id.home_fab_accept_blood);
+        fabExpand=findViewById(R.id.home_fab_expand);
+
+        navigationView.setNavigationItemSelectedListener(this);
 
         camSelectImage=findViewById(R.id.home_cam_image_select);
         imgPost=findViewById(R.id.home_post_image);
@@ -71,6 +81,24 @@ public class HomeActivity extends AppCompatActivity {
 
         setUpToolBar();
         retriveSharedPreferenceData();
+
+        fabExpand.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(fabExpandCheck==0) {
+                    rotateFabForward();
+                    fabExpandCheck = 1;
+                    fabDonateBlood.show();
+                    fabAcceptBlood.show();
+                }
+                else {
+                    rotateFabBackward();
+                    fabExpandCheck = 0;
+                    fabDonateBlood.hide();
+                    fabAcceptBlood.hide();
+                }
+            }
+        });
 
         btnPost.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -215,6 +243,21 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent i;
+        switch (item.getItemId()) {
+            case R.id.overflow_menu_donate_blood:
+                i = new Intent(this,DonarListActivity.class);
+                startActivity(i);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     boolean doubleBackToExitPressedOnce = false;
 
     @Override
@@ -239,5 +282,42 @@ public class HomeActivity extends AppCompatActivity {
     public void finish() {
         super.finish();
         overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+    }
+
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        Intent i;
+        switch (menuItem.getItemId()) {
+
+            case R.id.nav_menu_donate_blood: {
+                i = new Intent(this,DonarListActivity.class);
+                this.startActivity(i);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                drawerLayout.closeDrawer(GravityCompat.START);
+                break;
+            }
+        }
+        //close navigation drawer
+
+        return true;
+    }
+
+    public void rotateFabForward() {
+        ViewCompat.animate(fabExpand)
+                .rotation(135.0F)
+                .withLayer()
+                .setDuration(300L)
+                .setInterpolator(new OvershootInterpolator(10.0F))
+                .start();
+    }
+
+    public void rotateFabBackward() {
+        ViewCompat.animate(fabExpand)
+                .rotation(0.0F)
+                .withLayer()
+                .setDuration(300L)
+                .setInterpolator(new OvershootInterpolator(10.0F))
+                .start();
     }
 }
