@@ -12,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -19,6 +20,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -27,6 +29,7 @@ import java.util.Locale;
 import static com.lifeline.nyinst.avinash.SplashActivity.dobFinal;
 import static com.lifeline.nyinst.avinash.SplashActivity.myPreferences;
 import static com.lifeline.nyinst.avinash.SplashActivity.nameFinal;
+import static com.lifeline.nyinst.avinash.SplashActivity.profilePicFinal;
 
 public class RegistrationNameActivity extends AppCompatActivity {
 
@@ -37,6 +40,7 @@ public class RegistrationNameActivity extends AppCompatActivity {
     private Bitmap bitmap;
     final Calendar myCalendar = Calendar.getInstance();
     SharedPreferences sharedPreferences;
+    Boolean isImageSelected=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +102,8 @@ public class RegistrationNameActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor=sharedPreferences.edit();
                     editor.putString(nameFinal,name);
                     editor.putString(dobFinal,birthday);
+                    if(isImageSelected)
+                        editor.putString(profilePicFinal, encodeTobase64(bitmap));
                     editor.commit();
                     Intent i = new Intent(RegistrationNameActivity.this, RegistrationLocationActivity.class);
                     startActivity(i);
@@ -105,6 +111,16 @@ public class RegistrationNameActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    //Encode Bitmap Image to String
+    public String encodeTobase64(Bitmap image) {
+        Bitmap bitmap_image = image;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap_image.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        byte[] b = baos.toByteArray();
+        String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
+        return imageEncoded;
     }
 
     @Override
@@ -137,6 +153,7 @@ public class RegistrationNameActivity extends AppCompatActivity {
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), path);
                 profile_pic.setImageBitmap(bitmap);
+                isImageSelected=true;
             }
             catch (IOException e)
             {

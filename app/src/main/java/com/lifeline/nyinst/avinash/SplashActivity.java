@@ -13,6 +13,7 @@ public class SplashActivity extends AppCompatActivity {
     static final String myPreferences="LifeLineData";
     public static final String countryCodeFinal="countryCodeKey";
     public static final String contactNumberFinal="contactNumberKey";
+    public static final String profilePicFinal="profilePicKey";
     public static final String nameFinal="nameKey";
     public static final String dobFinal="dobKey";
     public static final String addressFinal="addressKey";

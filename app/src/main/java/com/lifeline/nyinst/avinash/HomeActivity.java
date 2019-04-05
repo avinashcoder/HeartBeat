@@ -3,12 +3,13 @@ package com.lifeline.nyinst.avinash;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewCompat;
@@ -18,6 +19,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -31,11 +33,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.github.clans.fab.FloatingActionMenu;
+import com.github.clans.fab.FloatingActionButton;
+
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
 import static com.lifeline.nyinst.avinash.SplashActivity.addressFinal;
 import static com.lifeline.nyinst.avinash.SplashActivity.bloodGroupFinal;
 import static com.lifeline.nyinst.avinash.SplashActivity.contactNumberFinal;
 import static com.lifeline.nyinst.avinash.SplashActivity.myPreferences;
 import static com.lifeline.nyinst.avinash.SplashActivity.nameFinal;
+import static com.lifeline.nyinst.avinash.SplashActivity.profilePicFinal;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -47,12 +58,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     SharedPreferences sharedPreferences;
     String name,addressvalue,contact,bloodGroup;
     ImageView camSelectImage,imgPost;
+    CircleImageView homeUserPic;
     Button btnPost;
     EditText editTextPost;
     String postText;
     ProgressBar progressBar;
-    FloatingActionButton fabDonateBlood,fabAcceptBlood,fabExpand;
-    int fabExpandCheck=0;
+    FloatingActionButton fabDonateBlood,fabAcceptBlood;
+    FloatingActionMenu fabExpand;
+    Bitmap bitmap;
 
     private final int IMG_REQUEST = 1;
 
@@ -67,6 +80,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         address=headerView.findViewById(R.id.nav_drawer_user_address);
         profileImgView=headerView.findViewById(R.id.nav_drawer_user_profile_pic);
         bloodGroupImgView=headerView.findViewById(R.id.nav_drawer_user_blood_group);
+        homeUserPic=findViewById(R.id.home_user_profile_pic);
+
         fabDonateBlood=findViewById(R.id.home_fab_donate_blood);
         fabAcceptBlood=findViewById(R.id.home_fab_accept_blood);
         fabExpand=findViewById(R.id.home_fab_expand);
@@ -82,23 +97,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         setUpToolBar();
         retriveSharedPreferenceData();
 
-        fabExpand.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(fabExpandCheck==0) {
-                    rotateFabForward();
-                    fabExpandCheck = 1;
-                    fabDonateBlood.show();
-                    fabAcceptBlood.show();
-                }
-                else {
-                    rotateFabBackward();
-                    fabExpandCheck = 0;
-                    fabDonateBlood.hide();
-                    fabAcceptBlood.hide();
-                }
-            }
-        });
+
 
         btnPost.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -181,6 +180,18 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         if(sharedPreferences.contains(bloodGroupFinal)){
             bloodGroup=sharedPreferences.getString(bloodGroupFinal,"Blood Group");
             setBloodGroupImage();
+        }
+        if(sharedPreferences.contains(profilePicFinal)){
+            String photo = sharedPreferences.getString(profilePicFinal, "photo");
+            assert photo != null;
+            if(!photo.equals("photo"))
+            {
+                byte[] b = Base64.decode(photo, Base64.DEFAULT);
+                InputStream is = new ByteArrayInputStream(b);
+                bitmap = BitmapFactory.decodeStream(is);
+                profileImgView.setImageBitmap(bitmap);
+                homeUserPic.setImageBitmap(bitmap);
+            }
         }
     }
 
@@ -298,26 +309,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
             }
         }
-        //close navigation drawer
 
         return true;
     }
 
-    public void rotateFabForward() {
-        ViewCompat.animate(fabExpand)
-                .rotation(135.0F)
-                .withLayer()
-                .setDuration(300L)
-                .setInterpolator(new OvershootInterpolator(10.0F))
-                .start();
-    }
-
-    public void rotateFabBackward() {
-        ViewCompat.animate(fabExpand)
-                .rotation(0.0F)
-                .withLayer()
-                .setDuration(300L)
-                .setInterpolator(new OvershootInterpolator(10.0F))
-                .start();
-    }
 }

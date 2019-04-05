@@ -33,6 +33,7 @@ import static com.lifeline.nyinst.avinash.SplashActivity.latitudeFinal;
 import static com.lifeline.nyinst.avinash.SplashActivity.longitudeFinal;
 import static com.lifeline.nyinst.avinash.SplashActivity.myPreferences;
 import static com.lifeline.nyinst.avinash.SplashActivity.nameFinal;
+import static com.lifeline.nyinst.avinash.SplashActivity.profilePicFinal;
 import static com.lifeline.nyinst.avinash.SplashActivity.stateFinal;
 import static com.lifeline.nyinst.avinash.SplashActivity.userInterestFinal;
 import static com.lifeline.nyinst.avinash.SplashActivity.userTypeFinal;
@@ -43,8 +44,8 @@ public class RegistrationGenderActivity extends AppCompatActivity {
     Button regGenderNext;
     String gender="",userType="";
     SharedPreferences sharedPreferences;
-    String URL_POST ="http://localhost/lifeline/lifelineregister.php";
-    String countryCode,contactNumber,name,birthday,address,bloodGroup,city,state,country,latitude,longitude,interest;
+    String URL_POST ="http://192.168.43.253/lifeline/lifelineregister.php";
+    String countryCode,contactNumber,name,birthday,address,bloodGroup,city,state,country,latitude,longitude,interest,profilePicString;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -175,6 +176,7 @@ public class RegistrationGenderActivity extends AppCompatActivity {
                 params.put("latitude",latitude);
                 params.put("longitude",longitude);
                 params.put("interest",interest);
+                params.put("profilepic",profilePicString);
 
                 return params;
             }
@@ -230,6 +232,9 @@ public class RegistrationGenderActivity extends AppCompatActivity {
         }
         if(sharedPreferences.contains(longitudeFinal)){
             longitude=sharedPreferences.getString(longitudeFinal,"longitude");
+        }
+        if(sharedPreferences.contains(profilePicFinal)){
+            profilePicString=sharedPreferences.getString(profilePicFinal,"profilePic");
         }
     }
 }
