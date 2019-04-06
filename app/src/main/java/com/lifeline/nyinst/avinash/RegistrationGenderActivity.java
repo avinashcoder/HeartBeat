@@ -21,6 +21,7 @@ import com.android.volley.toolbox.Volley;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.lifeline.nyinst.avinash.SplashActivity.URL_POST;
 import static com.lifeline.nyinst.avinash.SplashActivity.addressFinal;
 import static com.lifeline.nyinst.avinash.SplashActivity.bloodGroupFinal;
 import static com.lifeline.nyinst.avinash.SplashActivity.cityFinal;
@@ -44,8 +45,8 @@ public class RegistrationGenderActivity extends AppCompatActivity {
     Button regGenderNext;
     String gender="",userType="";
     SharedPreferences sharedPreferences;
-    String URL_POST ="http://192.168.43.253/lifeline/lifelineregister.php";
-    String countryCode,contactNumber,name,birthday,address,bloodGroup,city,state,country,latitude,longitude,interest,profilePicString;
+
+    String countryCode,contactNumber,name,birthday,address,bloodGroup,city,state,country,latitude,longitude,interest,profilePicString="default";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -145,7 +146,7 @@ public class RegistrationGenderActivity extends AppCompatActivity {
     }
 
     private void registerUser() {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_POST, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_POST+"lifelineregister.php", new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {

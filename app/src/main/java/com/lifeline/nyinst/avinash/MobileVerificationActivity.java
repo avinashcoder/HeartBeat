@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -23,11 +24,30 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
+import static com.lifeline.nyinst.avinash.SplashActivity.URL_POST;
+import static com.lifeline.nyinst.avinash.SplashActivity.addressFinal;
+import static com.lifeline.nyinst.avinash.SplashActivity.bloodGroupFinal;
+import static com.lifeline.nyinst.avinash.SplashActivity.cityFinal;
 import static com.lifeline.nyinst.avinash.SplashActivity.contactNumberFinal;
 import static com.lifeline.nyinst.avinash.SplashActivity.countryCodeFinal;
+import static com.lifeline.nyinst.avinash.SplashActivity.countryFinal;
+import static com.lifeline.nyinst.avinash.SplashActivity.dobFinal;
+import static com.lifeline.nyinst.avinash.SplashActivity.genderFinal;
+import static com.lifeline.nyinst.avinash.SplashActivity.latitudeFinal;
+import static com.lifeline.nyinst.avinash.SplashActivity.longitudeFinal;
 import static com.lifeline.nyinst.avinash.SplashActivity.myPreferences;
+import static com.lifeline.nyinst.avinash.SplashActivity.nameFinal;
+import static com.lifeline.nyinst.avinash.SplashActivity.profilePicFinal;
+import static com.lifeline.nyinst.avinash.SplashActivity.stateFinal;
+import static com.lifeline.nyinst.avinash.SplashActivity.userInterestFinal;
+import static com.lifeline.nyinst.avinash.SplashActivity.userTypeFinal;
 
 public class MobileVerificationActivity extends AppCompatActivity {
     EditText et_country_code,et_mob_no,et_otp;
@@ -38,8 +58,12 @@ public class MobileVerificationActivity extends AppCompatActivity {
     String URL;
     ProgressBar progressBar;
     ImageView imgBackBtn;
+    Boolean isPreviouslyRegistered=false;
 
     SharedPreferences sharedPreferences;
+
+    String name,birthday,address,bloodGroup,gender,userType,city,state,country,latitude,longitude,interest,profilePicString;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,26 +142,120 @@ public class MobileVerificationActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(et_otp.getText().toString().equals(OTP)) {
 
-                    sharedPreferences=getSharedPreferences(myPreferences, Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor=sharedPreferences.edit();
-                    editor.putString(contactNumberFinal,contactNo);
-                    editor.putString(countryCodeFinal,countryCode);
-                    editor.commit();
-
-                    Toast.makeText(getApplicationContext(),"OTP Verified Successfully",Toast.LENGTH_SHORT).show();
-
-                    Intent intent = new Intent(MobileVerificationActivity.this, RegistrationNameActivity.class);
-                    startActivity(intent);
-                    finish();
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-
-
+                    checkFromDatabase();
                 }
                 else{
                     Toast.makeText(getApplicationContext(),"Incorrect OTP, Plese enter correct OTP to Proceed",Toast.LENGTH_SHORT).show();
                 }
             }
         });
+    }
+
+    private void updateSharedPreferencePreviouslyRegistered() {
+        sharedPreferences = getSharedPreferences(myPreferences, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(contactNumberFinal, contactNo);
+        editor.putString(countryCodeFinal, countryCode);
+        editor.putString(nameFinal,name);
+        editor.putString(dobFinal,birthday);
+        if(!profilePicString.equals("default"))
+            editor.putString(profilePicFinal, profilePicString);
+        editor.putString(addressFinal,address);
+        editor.putString(cityFinal,city);
+        editor.putString(stateFinal,state);
+        editor.putString(countryFinal,country);
+        editor.putString(latitudeFinal,String.valueOf(latitude));
+        editor.putString(longitudeFinal,String.valueOf(longitude));
+        editor.putString(bloodGroupFinal,bloodGroup);
+        editor.putString(userInterestFinal,interest);
+        editor.putString(genderFinal,gender);
+        editor.putString(userTypeFinal,userType);
+
+        editor.commit();
+        nextActivityHome();
+    }
+
+    private void nextActivityHome() {
+            Intent intent = new Intent(MobileVerificationActivity.this, HomeActivity.class);
+            startActivity(intent);
+            finish();
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+    }
+
+    private void checkFromDatabase() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_POST+"checklogin.php", new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                if(!(response.contains("nodatafound"))) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        name = jsonObject.getString("name");
+                        birthday = jsonObject.getString("birthday");
+                        bloodGroup = jsonObject.getString("bloodgroup");
+                        gender = jsonObject.getString("gender");
+                        userType = jsonObject.getString("user_category");
+                        address = jsonObject.getString("address");
+                        city = jsonObject.getString("city");
+                        state = jsonObject.getString("state");
+                        country = jsonObject.getString("country");
+                        latitude = jsonObject.getString("latitude");
+                        longitude = jsonObject.getString("longitude");
+                        interest = jsonObject.getString("interest");
+                        profilePicString = jsonObject.getString("profile_img");
+                        isPreviouslyRegistered = true;
+                        Toast.makeText(getApplicationContext(),profilePicString,Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), name, Toast.LENGTH_LONG).show();
+
+                        updateSharedPreferencePreviouslyRegistered();
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else
+                {
+                    nextActivityRegistration();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(MobileVerificationActivity.this, error + "", Toast.LENGTH_LONG).show();
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("mob_no",contactNo);
+
+                return params;
+            }
+        };
+
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+    private void nextActivityRegistration() {
+        sharedPreferences = getSharedPreferences(myPreferences, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(contactNumberFinal, contactNo);
+        editor.putString(countryCodeFinal, countryCode);
+        editor.commit();
+
+        Toast.makeText(getApplicationContext(), "OTP Verified Successfully", Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(MobileVerificationActivity.this, RegistrationNameActivity.class);
+        startActivity(intent);
+        finish();
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
     @Override
