@@ -251,6 +251,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 break;
             }
+            case R.id.nav_menu_setting: {
+                i = new Intent(this,SettingActivity.class);
+                this.startActivity(i);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                break;
+            }
         }
         drawerLayout.closeDrawer(GravityCompat.START);
 
