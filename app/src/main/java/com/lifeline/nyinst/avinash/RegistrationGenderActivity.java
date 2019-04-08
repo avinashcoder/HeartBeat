@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -45,6 +46,7 @@ public class RegistrationGenderActivity extends AppCompatActivity {
     Button regGenderNext;
     String gender="",userType="";
     SharedPreferences sharedPreferences;
+    ProgressBar progressBar;
 
     String countryCode,contactNumber,name,birthday,address,bloodGroup,city,state,country,latitude,longitude,interest,profilePicString="default";
     @Override
@@ -62,6 +64,7 @@ public class RegistrationGenderActivity extends AppCompatActivity {
         bloodBankMark=findViewById(R.id.reg_usertype_bloodbank_mark);
         doctorMark=findViewById(R.id.reg_usertype_doctor_mark);
         regGenderNext=findViewById(R.id.btn_reg_gender_next);
+        progressBar=findViewById(R.id.reg_gender_progressBar);
 
         regGenderNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +78,8 @@ public class RegistrationGenderActivity extends AppCompatActivity {
                     Toast.makeText(RegistrationGenderActivity.this,"Plese tell us your category",Toast.LENGTH_SHORT).show();
                 }
                 else {
+                    progressBar.setVisibility(View.VISIBLE);
+                    regGenderNext.setVisibility(View.GONE);
                     sharedPreferences=getSharedPreferences(myPreferences, Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor=sharedPreferences.edit();
                     editor.putString(genderFinal,gender);
@@ -254,6 +259,8 @@ public class RegistrationGenderActivity extends AppCompatActivity {
     }
 
     private void handleErrorVolley(){
+        progressBar.setVisibility(View.GONE);
+        regGenderNext.setVisibility(View.VISIBLE);
         Toast.makeText(getApplicationContext(),"Sorrry!, Unable to Register, Plese try later",Toast.LENGTH_LONG).show();
         sharedPreferences=getSharedPreferences(myPreferences, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor=sharedPreferences.edit();

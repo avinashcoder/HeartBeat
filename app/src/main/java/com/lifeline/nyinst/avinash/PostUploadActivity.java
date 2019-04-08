@@ -18,12 +18,25 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.lifeline.nyinst.avinash.SplashActivity.URL_POST;
+import static com.lifeline.nyinst.avinash.SplashActivity.contactNumberFinal;
 import static com.lifeline.nyinst.avinash.SplashActivity.myPreferences;
 import static com.lifeline.nyinst.avinash.SplashActivity.profilePicFinal;
 
@@ -38,6 +51,7 @@ public class PostUploadActivity extends AppCompatActivity {
     private final int IMG_REQUEST = 1;
     Bitmap bitmap;
     SharedPreferences sharedPreferences;
+    String contactNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +88,7 @@ public class PostUploadActivity extends AppCompatActivity {
                     progressBarMain.setVisibility(View.VISIBLE);
                     progressBarTextView.setVisibility(View.VISIBLE);
                     postUpload.setVisibility(View.GONE);
+                    uploadPost();
                 }
                 else {
                     Toast.makeText(getApplicationContext(),"Plese write something or select image for post",Toast.LENGTH_LONG).show();
@@ -94,6 +109,9 @@ public class PostUploadActivity extends AppCompatActivity {
                 bitmap = BitmapFactory.decodeStream(is);
                 userImage.setImageBitmap(bitmap);
             }
+        }
+        if(sharedPreferences.contains(contactNumberFinal)){
+            contactNumber=sharedPreferences.getString(contactNumberFinal,"Contact");
         }
     }
 
@@ -121,5 +139,64 @@ public class PostUploadActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+    }
+
+
+    private void uploadPost(){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_POST+"uploadpost.php", new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
+                if(response.contains("success")){
+                    progressBarMain.setVisibility(View.GONE);
+                    progressBarTextView.setVisibility(View.GONE);
+                    postUpload.setVisibility(View.VISIBLE);
+                    finish();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Unable to Upload your Post, Plese try again", Toast.LENGTH_LONG).show();
+                    progressBarMain.setVisibility(View.GONE);
+                    progressBarTextView.setVisibility(View.GONE);
+                    postUpload.setVisibility(View.VISIBLE);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(PostUploadActivity.this, error + "", Toast.LENGTH_LONG).show();
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+
+                String postDesc=postUploadText.getText().toString().trim();
+
+                params.put("mob_no",contactNumber);
+                params.put("post_desc",postDesc);
+                if(isImageSelected) {
+                    params.put("postimg", encodeTobase64(bitmap));
+                }
+
+
+                return params;
+            }
+        };
+
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+
+    }
+
+    public String encodeTobase64(Bitmap image) {
+        Bitmap bitmap_image = image;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap_image.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] b = baos.toByteArray();
+        String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
+        return imageEncoded;
     }
 }
