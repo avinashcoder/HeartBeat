@@ -5,36 +5,27 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.OvershootInterpolator;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-import com.github.clans.fab.FloatingActionMenu;
 import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -53,21 +44,17 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     ActionBarDrawerToggle actionBarDrawerToggle;
-    ImageView profileImgView,bloodGroupImgView;
+    ImageView bloodGroupImgView;
     TextView userName,address;
     SharedPreferences sharedPreferences;
     String name,addressvalue,contact,bloodGroup;
-    ImageView camSelectImage,imgPost;
-    CircleImageView homeUserPic;
-    Button btnPost;
-    EditText editTextPost;
-    String postText;
-    ProgressBar progressBar;
+    ImageView camSelectImage;
+    CircleImageView profileImgView, homeUserPic;
+    TextView tvTextPost;
     FloatingActionButton fabDonateBlood,fabAcceptBlood;
     FloatingActionMenu fabExpand;
     Bitmap bitmap;
 
-    private final int IMG_REQUEST = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,62 +76,23 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         camSelectImage=findViewById(R.id.home_cam_image_select);
-        imgPost=findViewById(R.id.home_post_image);
-        editTextPost=findViewById(R.id.home_edit_text_post);
-        btnPost=findViewById(R.id.home_post_btn);
-        progressBar=findViewById(R.id.home_post_upload_progressBar);
+        tvTextPost=findViewById(R.id.home_edit_text_post);
 
         setUpToolBar();
         retriveSharedPreferenceData();
 
-
-
-        btnPost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                progressBar.setVisibility(View.VISIBLE);
-                new Handler().postDelayed(new Runnable(){
-                    @Override
-                    public void run() {
-                        progressBar.setVisibility(View.INVISIBLE);
-                        imgPost.setVisibility(View.INVISIBLE);
-                        btnPost.setVisibility(View.INVISIBLE);
-                        editTextPost.setText("");
-                    }
-                }, 3000);
-            }
-        });
-
         camSelectImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectImage();
+                openPostUploadActivity();
             }
         });
-
-        editTextPost.addTextChangedListener(new TextWatcher() {
+        tvTextPost.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                postText=editTextPost.getText().toString().trim();
-                if(postText.isEmpty()){
-                    btnPost.setVisibility(View.GONE);
-                }
-                else{
-                    btnPost.setVisibility(View.GONE);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
+            public void onClick(View v) {
+                openPostUploadActivity();
             }
         });
-
     }
 
     private  void setUpToolBar(){
@@ -234,25 +182,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    private void selectImage()
-    {
-        Intent intent=new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent,IMG_REQUEST);
-    }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==IMG_REQUEST && resultCode==RESULT_OK && data!=null)
-        {
-            Uri path = data.getData();
-            imgPost.setImageURI(path);
-            imgPost.setVisibility(View.VISIBLE);
-            btnPost.setVisibility(View.VISIBLE);
-        }
-    }
 
 
     @Override
@@ -264,6 +194,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(i);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 return true;
+
+            case R.id.overflow_menu_find_blood: {
+                i = new Intent(this,AcceptorListActivity.class);
+                this.startActivity(i);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                return true;
+            }
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -275,6 +212,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
             super.finish();
+            overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
             return;
         }
 
@@ -305,12 +243,23 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 i = new Intent(this,DonarListActivity.class);
                 this.startActivity(i);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                drawerLayout.closeDrawer(GravityCompat.START);
+                break;
+            }
+            case R.id.nav_menu_find_blood: {
+                i = new Intent(this,AcceptorListActivity.class);
+                this.startActivity(i);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 break;
             }
         }
+        drawerLayout.closeDrawer(GravityCompat.START);
 
         return true;
+    }
+
+    private void openPostUploadActivity(){
+        Intent i=new Intent(HomeActivity.this,PostUploadActivity.class);
+        startActivity(i);
     }
 
 }

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.lifeline.nyinst.avinash.PostUploadActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary" >
+
+        <!--<ImageView-->
+            <!--android:layout_width="30dp"-->
+            <!--android:layout_marginLeft="15dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_gravity="left|center"-->
+            <!--android:src="@drawable/ic_action_back_arrow_white"/>-->
+
+        <TextView
+            android:id="@+id/post_upload_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="2dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:layout_gravity="right|center"
+            android:gravity="center"
+            android:textSize="18dp"
+            android:textColor="#FFF"
+            android:drawableRight="@drawable/ic_action_forward_arrow_white"
+            android:text="POST   "/>
+        <ProgressBar
+            android:id="@+id/post_upload_progressBar_textview"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center|right"
+            android:padding="15dp"
+            android:visibility="gone"
+            android:indeterminateDrawable="@drawable/progressbar"
+            android:layout_height="wrap_content" />
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="4dp"
+        android:background="#FFF"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:weightSum="10">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/post_upload_user_profile_pic"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:padding="5dp"
+            android:src="@drawable/profile_pic_default" />
+
+        <EditText
+            android:id="@+id/post_upload__edit_text_post"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="2dp"
+            android:layout_weight="7.3"
+            android:background="#00000000"
+            android:hint="Share and post your view about blood donation"
+            android:inputType="text"
+            android:layout_gravity="center"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/post_upload_cam_image_select"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.2"
+            android:padding="10dp"
+            android:src="@drawable/ic_camera_dark" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/post_upload_image_post"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_margin="10dp"
+        android:src="@drawable/noimage"/>
+
+    <ProgressBar
+        android:id="@+id/post_upload_progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:indeterminateDrawable="@drawable/progressbar"
+        android:visibility="gone"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

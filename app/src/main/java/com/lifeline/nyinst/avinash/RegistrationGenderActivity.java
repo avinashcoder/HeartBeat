@@ -82,11 +82,7 @@ public class RegistrationGenderActivity extends AppCompatActivity {
                     editor.commit();
                     retriveSharedPreferenceData();
                     registerUser();
-                    Intent i = new Intent(RegistrationGenderActivity.this, HomeActivity.class);
-                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(i);
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
                 }
             }
         });
@@ -151,11 +147,18 @@ public class RegistrationGenderActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
+                if(response.contains("success")){
+                    nextHomeActivity();
+                }
+                else {
+                    handleErrorVolley();
+                }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(RegistrationGenderActivity.this, error + "", Toast.LENGTH_LONG).show();
+                handleErrorVolley();
 
             }
         }) {
@@ -239,5 +242,22 @@ public class RegistrationGenderActivity extends AppCompatActivity {
         if(sharedPreferences.contains(profilePicFinal)){
             profilePicString=sharedPreferences.getString(profilePicFinal,"profilePic");
         }
+    }
+
+    public void nextHomeActivity(){
+        Toast.makeText(getApplicationContext(),"Welcome Successfully Login",Toast.LENGTH_LONG).show();
+        Intent i = new Intent(RegistrationGenderActivity.this, HomeActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(i);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+    }
+
+    private void handleErrorVolley(){
+        Toast.makeText(getApplicationContext(),"Sorrry!, Unable to Register, Plese try later",Toast.LENGTH_LONG).show();
+        sharedPreferences=getSharedPreferences(myPreferences, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        editor.remove(userTypeFinal);
+        editor.commit();
     }
 }

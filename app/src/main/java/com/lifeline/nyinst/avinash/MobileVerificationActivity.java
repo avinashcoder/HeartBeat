@@ -141,7 +141,6 @@ public class MobileVerificationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(et_otp.getText().toString().equals(OTP)) {
-
                     checkFromDatabase();
                 }
                 else{
