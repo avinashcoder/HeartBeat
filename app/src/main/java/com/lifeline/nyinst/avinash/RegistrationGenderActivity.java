@@ -177,7 +177,9 @@ public class RegistrationGenderActivity extends AppCompatActivity {
                 params.put("latitude",latitude);
                 params.put("longitude",longitude);
                 params.put("interest",interest);
-                params.put("profilepic",profilePicString);
+                if(!(profilePicString.equals("default"))) {
+                    params.put("profilepic", profilePicString);
+                }
 
                 return params;
             }

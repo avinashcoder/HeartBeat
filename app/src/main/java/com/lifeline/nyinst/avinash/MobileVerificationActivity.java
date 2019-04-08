@@ -62,7 +62,7 @@ public class MobileVerificationActivity extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;
 
-    String name,birthday,address,bloodGroup,gender,userType,city,state,country,latitude,longitude,interest,profilePicString;
+    String name,birthday,address,bloodGroup,gender,userType,city,state,country,latitude,longitude,interest,profilePicString="default";
 
 
     @Override
@@ -158,8 +158,10 @@ public class MobileVerificationActivity extends AppCompatActivity {
         editor.putString(countryCodeFinal, countryCode);
         editor.putString(nameFinal,name);
         editor.putString(dobFinal,birthday);
-        if(!profilePicString.equals("default"))
+        if(!(profilePicString.equals("default")))
+        {
             editor.putString(profilePicFinal, profilePicString);
+        }
         editor.putString(addressFinal,address);
         editor.putString(cityFinal,city);
         editor.putString(stateFinal,state);
@@ -205,7 +207,6 @@ public class MobileVerificationActivity extends AppCompatActivity {
                         interest = jsonObject.getString("interest");
                         profilePicString = jsonObject.getString("profile_img");
                         isPreviouslyRegistered = true;
-                        Toast.makeText(getApplicationContext(),profilePicString,Toast.LENGTH_LONG).show();
                         Toast.makeText(getApplicationContext(), name, Toast.LENGTH_LONG).show();
 
                         updateSharedPreferencePreviouslyRegistered();

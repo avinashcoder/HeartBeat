@@ -117,7 +117,7 @@ public class RegistrationNameActivity extends AppCompatActivity {
     public String encodeTobase64(Bitmap image) {
         Bitmap bitmap_image = image;
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap_image.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        bitmap_image.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] b = baos.toByteArray();
         String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
         return imageEncoded;
