@@ -39,5 +39,8 @@ dependencies {
     //Floating Action Menu
     implementation 'com.github.clans:fab:1.6.4'
 
+    //Downloading Image from URL
+    implementation 'com.facebook.fresco:fresco:1.13.0'
+
 
 }

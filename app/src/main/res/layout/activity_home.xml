@@ -78,6 +78,7 @@
 
 
                     <android.support.v7.widget.RecyclerView
+                        android:id="@+id/home_recyler_view"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical" />
@@ -90,8 +91,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|bottom"
-                android:layout_marginRight="5dp"
-                android:layout_marginBottom="5dp"
                 fab:menu_animationDelayPerItem="55"
                 fab:menu_backgroundColor="@android:color/transparent"
                 fab:menu_buttonSpacing="0dp"

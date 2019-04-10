@@ -6,12 +6,24 @@
         android:title="My Profile"/>
 
     <item
+        android:id="@+id/nav_menu_message"
+        android:title="Message"/>
+
+    <item
         android:id="@+id/nav_menu_donate_blood"
-        android:title="Donate Blood"/>
+        android:title="Available Donars"/>
 
     <item
         android:id="@+id/nav_menu_find_blood"
-        android:title="Find Blood"/>
+        android:title="Available Acceptors"/>
+
+    <item
+        android:id="@+id/nav_menu_request"
+        android:title="Your Request"/>
+
+    <item
+        android:id="@+id/nav_menu_contribution"
+        android:title="Your Contribution"/>
 
     <item
         android:id="@+id/nav_menu_setting"
