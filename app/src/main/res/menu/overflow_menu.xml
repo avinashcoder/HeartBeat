@@ -10,11 +10,11 @@
 
     <item
         android:id="@+id/overflow_menu_donate_blood"
-        android:title="Donate Blood"/>
+        android:title="Available Donars"/>
 
     <item
         android:id="@+id/overflow_menu_find_blood"
-        android:title="Find Blood"/>
+        android:title="Available Acceptors"/>
 
     <item
         android:id="@+id/overflow_menu_rules"

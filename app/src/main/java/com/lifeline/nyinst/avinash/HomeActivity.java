@@ -13,6 +13,8 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.view.Menu;
@@ -24,14 +26,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.lifeline.nyinst.avinash.SplashActivity.URL_POST;
 import static com.lifeline.nyinst.avinash.SplashActivity.addressFinal;
 import static com.lifeline.nyinst.avinash.SplashActivity.bloodGroupFinal;
 import static com.lifeline.nyinst.avinash.SplashActivity.contactNumberFinal;
@@ -54,12 +66,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     FloatingActionButton fabDonateBlood,fabAcceptBlood;
     FloatingActionMenu fabExpand;
     Bitmap bitmap;
+    RecyclerView recyclerView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        Fresco.initialize(this);
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
@@ -73,6 +87,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         fabAcceptBlood=findViewById(R.id.home_fab_accept_blood);
         fabExpand=findViewById(R.id.home_fab_expand);
 
+        recyclerView=findViewById(R.id.home_recyler_view);
+        LinearLayoutManager layoutManager=new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
+
         navigationView.setNavigationItemSelectedListener(this);
 
         camSelectImage=findViewById(R.id.home_cam_image_select);
@@ -80,6 +99,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         setUpToolBar();
         retriveSharedPreferenceData();
+        getUploadedPost();
 
         camSelectImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -266,6 +286,45 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private void openPostUploadActivity(){
         Intent i=new Intent(HomeActivity.this,PostUploadActivity.class);
         startActivity(i);
+    }
+
+    private void getUploadedPost(){
+        List<PostViewModalClass> postViewModalClasses = new ArrayList<>();
+        postViewModalClasses.add(new PostViewModalClass("https://upload.wikimedia.org/wikipedia/commons/1/16/HDRI_Sample_Scene_Balls_%28JPEG-HDR%29.jpg","Avinash Kumar Singh","Chennai","1 day ago","Nice bro , Well Done","https://upload.wikimedia.org/wikipedia/commons/1/16/HDRI_Sample_Scene_Balls_%28JPEG-HDR%29.jpg",52,10));
+        postViewModalClasses.add(new PostViewModalClass("https://upload.wikimedia.org/wikipedia/commons/1/16/HDRI_Sample_Scene_Balls_%28JPEG-HDR%29.jpg","Avinash Kumar Singh","Chennai","1 day ago","Nice bro , Well Done","https://upload.wikimedia.org/wikipedia/commons/1/16/HDRI_Sample_Scene_Balls_%28JPEG-HDR%29.jpg",52,10));
+        postViewModalClasses.add(new PostViewModalClass("https://upload.wikimedia.org/wikipedia/commons/1/16/HDRI_Sample_Scene_Balls_%28JPEG-HDR%29.jpg","Avinash Kumar Singh","Chennai","1 day ago","Nice bro , Well Done","default",52,10));
+        postViewModalClasses.add(new PostViewModalClass("https://upload.wikimedia.org/wikipedia/commons/1/16/HDRI_Sample_Scene_Balls_%28JPEG-HDR%29.jpg","Avinash Kumar Singh","Chennai","1 day ago","Nice bro , Well Done","https://upload.wikimedia.org/wikipedia/commons/1/16/HDRI_Sample_Scene_Balls_%28JPEG-HDR%29.jpg",52,10));
+        postViewModalClasses.add(new PostViewModalClass("https://upload.wikimedia.org/wikipedia/commons/1/16/HDRI_Sample_Scene_Balls_%28JPEG-HDR%29.jpg","Avinash Kumar Singh","Chennai","1 day ago","Nice bro , Well Done","https://upload.wikimedia.org/wikipedia/commons/1/16/HDRI_Sample_Scene_Balls_%28JPEG-HDR%29.jpg",52,10));
+        postViewModalClasses.add(new PostViewModalClass("https://upload.wikimedia.org/wikipedia/commons/1/16/HDRI_Sample_Scene_Balls_%28JPEG-HDR%29.jpg","Avinash Kumar Singh","Chennai","1 day ago","Nice bro , Well Done","https://upload.wikimedia.org/wikipedia/commons/1/16/HDRI_Sample_Scene_Balls_%28JPEG-HDR%29.jpg",52,10));
+        postViewModalClasses.add(new PostViewModalClass("https://upload.wikimedia.org/wikipedia/commons/1/16/HDRI_Sample_Scene_Balls_%28JPEG-HDR%29.jpg","Avinash Kumar Singh","Chennai","1 day ago","default","https://upload.wikimedia.org/wikipedia/commons/1/16/HDRI_Sample_Scene_Balls_%28JPEG-HDR%29.jpg",52,10));
+        postViewModalClasses.add(new PostViewModalClass("https://upload.wikimedia.org/wikipedia/commons/1/16/HDRI_Sample_Scene_Balls_%28JPEG-HDR%29.jpg","Avinash Kumar Singh","Chennai","1 day ago","Nice bro , Well Done","https://upload.wikimedia.org/wikipedia/commons/1/16/HDRI_Sample_Scene_Balls_%28JPEG-HDR%29.jpg",52,10));
+        postViewModalClasses.add(new PostViewModalClass("https://upload.wikimedia.org/wikipedia/commons/1/16/HDRI_Sample_Scene_Balls_%28JPEG-HDR%29.jpg","Avinash Kumar Singh","Chennai","1 day ago","Nice bro , Well Done","https://upload.wikimedia.org/wikipedia/commons/1/16/HDRI_Sample_Scene_Balls_%28JPEG-HDR%29.jpg",52,10));
+        postViewModalClasses.add(new PostViewModalClass("default","Avinash Kumar Singh","Chennai","1 day ago","Nice bro , Well Done","https://upload.wikimedia.org/wikipedia/commons/1/16/HDRI_Sample_Scene_Balls_%28JPEG-HDR%29.jpg",52,10));
+        postViewModalClasses.add(new PostViewModalClass("https://upload.wikimedia.org/wikipedia/commons/1/16/HDRI_Sample_Scene_Balls_%28JPEG-HDR%29.jpg","Avinash Kumar Singh","Chennai","1 day ago","Nice bro , Well Done","https://upload.wikimedia.org/wikipedia/commons/1/16/HDRI_Sample_Scene_Balls_%28JPEG-HDR%29.jpg",52,10));
+        postViewModalClasses.add(new PostViewModalClass("https://upload.wikimedia.org/wikipedia/commons/1/16/HDRI_Sample_Scene_Balls_%28JPEG-HDR%29.jpg","Avinash Kumar Singh","Chennai","1 day ago","Nice bro , Well Done","https://upload.wikimedia.org/wikipedia/commons/1/16/HDRI_Sample_Scene_Balls_%28JPEG-HDR%29.jpg",52,10));
+        postViewModalClasses.add(new PostViewModalClass("https://upload.wikimedia.org/wikipedia/commons/1/16/HDRI_Sample_Scene_Balls_%28JPEG-HDR%29.jpg","Avinash Kumar Singh","Chennai","1 day ago","Nice bro , Well Done","https://upload.wikimedia.org/wikipedia/commons/1/16/HDRI_Sample_Scene_Balls_%28JPEG-HDR%29.jpg",52,10));
+        postViewModalClasses.add(new PostViewModalClass("https://upload.wikimedia.org/wikipedia/commons/1/16/HDRI_Sample_Scene_Balls_%28JPEG-HDR%29.jpg","Avinash Kumar Singh","Chennai","1 day ago","Nice bro , Well Done","https://upload.wikimedia.org/wikipedia/commons/1/16/HDRI_Sample_Scene_Balls_%28JPEG-HDR%29.jpg",52,10));
+        postViewModalClasses.add(new PostViewModalClass("https://upload.wikimedia.org/wikipedia/commons/1/16/HDRI_Sample_Scene_Balls_%28JPEG-HDR%29.jpg","Avinash Kumar Singh","Chennai","1 day ago","Nice bro , Well Done","https://upload.wikimedia.org/wikipedia/commons/1/16/HDRI_Sample_Scene_Balls_%28JPEG-HDR%29.jpg",52,10));
+
+        PostViewAdapter adapter = new PostViewAdapter(postViewModalClasses);
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+//        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_POST+"getuploadedpost.php", new Response.Listener<String>() {
+//
+//            @Override
+//            public void onResponse(String response) {
+//
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//            }
+//        });
+//
+//
+//        RequestQueue requestQueue = Volley.newRequestQueue(HomeActivity.this);
+//        requestQueue.add(stringRequest);
     }
 
 }
