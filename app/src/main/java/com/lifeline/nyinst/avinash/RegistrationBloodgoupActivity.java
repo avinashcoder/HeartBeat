@@ -22,7 +22,7 @@ public class RegistrationBloodgoupActivity extends AppCompatActivity {
     LinearLayout ll_a_positive,ll_b_positive,ll_ab_positive,ll_o_positive,ll_a_negative,ll_b_negative,ll_ab_negative,ll_o_negative;
     Button bt_reg_bloodgroup_next;
     TextView bloodStatusDonar,bloodStatusAcceptor;
-    String bloodGroup="",userInterest="";
+    String bloodGroup="",userInterest="no";
     SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,10 +70,6 @@ public class RegistrationBloodgoupActivity extends AppCompatActivity {
                 if(bloodGroup.equals(""))
                 {
                     Toast.makeText(RegistrationBloodgoupActivity.this, "Plese Select your blood group", Toast.LENGTH_SHORT).show();
-                }
-                else if(userInterest.equals(""))
-                {
-                    Toast.makeText(RegistrationBloodgoupActivity.this,"Plese select your current interest",Toast.LENGTH_SHORT).show();
                 }
                 else {
                     sharedPreferences=getSharedPreferences(myPreferences, Context.MODE_PRIVATE);
