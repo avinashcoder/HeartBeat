@@ -3,9 +3,10 @@ package com.lifeline.nyinst.avinash;
 public class PostViewModalClass {
 
     private String profileUrl, name, city, dayUploaded, postDescription, postImgUrl;
-    private int totalLike,totalComment;
+    private int id,totalLike,totalComment;
 
-    public PostViewModalClass(String profileUrl, String name, String city, String dayUploaded, String postDescription, String postImgUrl, int totalLike, int totalComment) {
+    public PostViewModalClass(int id,String profileUrl, String name, String city, String dayUploaded, String postDescription, String postImgUrl, int totalLike, int totalComment) {
+        this.id = id;
         this.profileUrl = profileUrl;
         this.name = name;
         this.city = city;
@@ -16,6 +17,10 @@ public class PostViewModalClass {
         this.totalComment = totalComment;
 
 
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getProfileUrl() {

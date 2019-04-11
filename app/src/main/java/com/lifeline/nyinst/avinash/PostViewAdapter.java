@@ -29,6 +29,7 @@ public class PostViewAdapter extends RecyclerView.Adapter<PostViewAdapter.Viewho
 
     @Override
     public void onBindViewHolder(@NonNull Viewholder viewholder, int position) {
+        int id=modalClassList.get(position).getId();
         String profilePicUrl = modalClassList.get(position).getProfileUrl();
         String name = modalClassList.get(position).getName();
         String city = modalClassList.get(position).getCity();
@@ -38,7 +39,7 @@ public class PostViewAdapter extends RecyclerView.Adapter<PostViewAdapter.Viewho
         int totalLike=modalClassList.get(position).getTotalLike();
         int totalComment=modalClassList.get(position).getTotalComment();
 
-        viewholder.setData(profilePicUrl,name,city,uploadDay,postDesc,postimgUrl,totalLike,totalComment);
+        viewholder.setData(id,profilePicUrl,name,city,uploadDay,postDesc,postimgUrl,totalLike,totalComment);
     }
 
     @Override
@@ -63,7 +64,7 @@ public class PostViewAdapter extends RecyclerView.Adapter<PostViewAdapter.Viewho
             totalComments=itemView.findViewById(R.id.card_view_post_total_comments);
         }
 
-        private void setData(String profileUrl, String name, String city, String dayUploaded, String postDescription, String postImgUrl, int totalLike, int totalComment){
+        private void setData(int id,String profileUrl, String name, String city, String dayUploaded, String postDescription, String postImgUrl, int totalLike, int totalComment){
             if(profileUrl.equals("default")) {
                 uploaderprofilepic.setImageResource(R.drawable.ic_launcher_foreground);
             }
@@ -82,7 +83,7 @@ public class PostViewAdapter extends RecyclerView.Adapter<PostViewAdapter.Viewho
             uploaderName.setText(name);
             uploaderCity.setText(city);
             uploadedDay.setText(dayUploaded);
-            if(postDescription.equals("default")) {
+            if(postDescription.equals("")) {
                 uploadedPostDesciption.setVisibility(View.GONE);
             }
             else {

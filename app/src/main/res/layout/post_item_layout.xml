@@ -94,7 +94,7 @@
                 android:id="@+id/card_view_post_img"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                fresco:viewAspectRatio="1.33"
+                fresco:viewAspectRatio="1"
                 android:layout_marginTop="5dp"/>
 
             <View
