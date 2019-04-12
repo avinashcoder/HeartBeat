@@ -26,7 +26,7 @@ public class SplashActivity extends AppCompatActivity {
     public static final String countryFinal="countryFinal";
     public static final String latitudeFinal="latitudeKey";
     public static final String longitudeFinal="longitudeKey";
-    public static String URL_POST ="http://192.168.43.253/lifeline/";
+    public static String URL_POST ="http://192.168.0.126/lifeline/";
 
     private final int SPLASH_DISPLAY_LENGTH = 3000;
 

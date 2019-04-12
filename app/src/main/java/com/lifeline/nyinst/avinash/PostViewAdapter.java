@@ -66,7 +66,7 @@ public class PostViewAdapter extends RecyclerView.Adapter<PostViewAdapter.Viewho
 
         private void setData(int id,String profileUrl, String name, String city, String dayUploaded, String postDescription, String postImgUrl, int totalLike, int totalComment){
             if(profileUrl.equals("default")) {
-                uploaderprofilepic.setImageResource(R.drawable.ic_launcher_foreground);
+                uploaderprofilepic.setImageResource(R.drawable.profile_pic_default);
             }
             else {
                 Uri uriprofile= Uri.parse(profileUrl);

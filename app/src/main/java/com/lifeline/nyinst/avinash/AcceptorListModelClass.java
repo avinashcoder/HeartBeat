@@ -6,7 +6,7 @@ public class AcceptorListModelClass {
     private int id;
     Double distance;
 
-    public AcceptorListModelClass(String profileUrl, String name, String city, String bloodGroup, String contact, int id, Double distance) {
+    public AcceptorListModelClass( int id, String profileUrl, String name, String city, String bloodGroup, String contact,Double distance) {
         this.profileUrl = profileUrl;
         this.name = name;
         this.city = city;

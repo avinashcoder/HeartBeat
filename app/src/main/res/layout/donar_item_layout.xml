@@ -89,16 +89,14 @@
 
                 </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/donar_item_layout_donar_bloodgroup"
-                    android:layout_width="45dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_gravity="center" />
-
-
-
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/donar_item_layout_donar_bloodgroup"
+                android:layout_width="40dp"
+                android:layout_height="45dp"
+                android:layout_marginLeft="50dp"
+                android:layout_gravity="center" />
 
             <Button
                 android:layout_width="wrap_content"

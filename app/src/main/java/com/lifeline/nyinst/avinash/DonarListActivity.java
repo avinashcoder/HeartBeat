@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ProgressBar;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +49,7 @@ public class DonarListActivity extends AppCompatActivity {
     ProgressBar progressBar;
     int distance=50;
     TextView tvSorry;
+    SeekBar seekBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,10 @@ public class DonarListActivity extends AppCompatActivity {
         fabExpand=findViewById(R.id.donar_list_fab_expand);
         fabDonateBlood=findViewById(R.id.donar_list_fab_donate_blood);
         fabAcceptBlood=findViewById(R.id.donar_list_fab_accept_blood);
+
+        seekBar=findViewById(R.id.donar_list_seekbar);
+
+
         progressBar=findViewById(R.id.donar_list_progress_bar);
         tvSorry=findViewById(R.id.donar_list_sorry_message);
 
@@ -67,6 +73,23 @@ public class DonarListActivity extends AppCompatActivity {
 
         getDonarList();
 
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                distance=progress;
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                getDonarList();
+            }
+        });
+
     }
     @Override
     public void finish() {
@@ -75,6 +98,7 @@ public class DonarListActivity extends AppCompatActivity {
     }
 
     private void getDonarList(){
+        progressBar.setVisibility(View.VISIBLE);
         sharedPreferences=getSharedPreferences(myPreferences, Context.MODE_PRIVATE);
         final String latitude=sharedPreferences.getString(latitudeFinal,"");
         final String longitude=sharedPreferences.getString(longitudeFinal,"");
