@@ -43,7 +43,7 @@
             android:layout_height="match_parent" />
 
         <ProgressBar
-            android:id="@+id/donar_list_prpgress_bar"
+            android:id="@+id/donar_list_progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -101,7 +101,15 @@
 
         </com.github.clans.fab.FloatingActionMenu>
 
-
+        <TextView
+            android:id="@+id/donar_list_sorry_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:gravity="center"
+            android:layout_marginTop="30dp"
+            android:visibility="gone"
+            android:text="Sorry !!!\n No Donar Available in this range\n "/>
 
     </FrameLayout>
 

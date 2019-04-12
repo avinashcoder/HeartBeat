@@ -1,12 +1,12 @@
 package com.lifeline.nyinst.avinash;
 
-public class DonarModelClass {
+public class AcceptorListModelClass {
 
     private String profileUrl,name,city,bloodGroup,contact;
     private int id;
     Double distance;
 
-    public DonarModelClass(int id, String profileUrl, String name, String city, String bloodGroup, String contact, Double distance) {
+    public AcceptorListModelClass(String profileUrl, String name, String city, String bloodGroup, String contact, int id, Double distance) {
         this.profileUrl = profileUrl;
         this.name = name;
         this.city = city;
@@ -40,7 +40,7 @@ public class DonarModelClass {
         return id;
     }
 
-    public double getDistance() {
+    public Double getDistance() {
         return distance;
     }
 }

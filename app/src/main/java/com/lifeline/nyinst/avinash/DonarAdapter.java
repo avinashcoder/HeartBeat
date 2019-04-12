@@ -35,7 +35,7 @@ public class DonarAdapter extends RecyclerView.Adapter<DonarAdapter.Viewholder> 
         String profileUrl=donarModelClassList.get(position).getProfileUrl();
         String name=donarModelClassList.get(position).getName();
         String city=donarModelClassList.get(position).getCity();
-        Float distance=donarModelClassList.get(position).getDistance();
+        Double distance=donarModelClassList.get(position).getDistance();
         String contactNo=donarModelClassList.get(position).getContact();
         String bloodGroup=donarModelClassList.get(position).getBloodGroup();
 
@@ -65,7 +65,7 @@ public class DonarAdapter extends RecyclerView.Adapter<DonarAdapter.Viewholder> 
             bloodGroupImageView=itemView.findViewById(R.id.donar_item_layout_donar_bloodgroup);
         }
 
-        private void setData(int id, String profileUrl, String name, String city,Float distance, String contactNo, String bloodGroup ){
+        private void setData(int id, String profileUrl, String name, String city,Double distance, String contactNo, String bloodGroup ){
             if(profileUrl.equals("default")){
                 profilepic.setImageResource(R.drawable.profile_pic_default);
             }

@@ -10,6 +10,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.animation.OvershootInterpolator;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -22,6 +24,7 @@ import com.android.volley.toolbox.Volley;
 import com.github.clans.fab.FloatingActionMenu;
 import com.github.clans.fab.FloatingActionButton;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -42,6 +45,9 @@ public class DonarListActivity extends AppCompatActivity {
     FloatingActionMenu fabExpand;
     SharedPreferences sharedPreferences;
     RecyclerView recyclerView;
+    ProgressBar progressBar;
+    int distance=50;
+    TextView tvSorry;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,19 +57,16 @@ public class DonarListActivity extends AppCompatActivity {
         fabExpand=findViewById(R.id.donar_list_fab_expand);
         fabDonateBlood=findViewById(R.id.donar_list_fab_donate_blood);
         fabAcceptBlood=findViewById(R.id.donar_list_fab_accept_blood);
+        progressBar=findViewById(R.id.donar_list_progress_bar);
+        tvSorry=findViewById(R.id.donar_list_sorry_message);
 
         recyclerView=findViewById(R.id.donar_list_recycler_view);
         LinearLayoutManager layoutManager=new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
-        final List<DonarModelClass> donarModelClassList = new ArrayList<>();
-        donarModelClassList.add(new DonarModelClass(1,"https://upload.wikimedia.org/wikipedia/commons/1/16/HDRI_Sample_Scene_Balls_%28JPEG-HDR%29.jpg","Avinash Kumar Singh","Chennai","B+","9931778331",4.5f));
-        donarModelClassList.add(new DonarModelClass(2,"https://upload.wikimedia.org/wikipedia/commons/1/16/HDRI_Sample_Scene_Balls_%28JPEG-HDR%29.jpg","Avinash Kumar Singh","Chennai","B+","9931778331",4.5f));
-        donarModelClassList.add(new DonarModelClass(3,"https://upload.wikimedia.org/wikipedia/commons/1/16/HDRI_Sample_Scene_Balls_%28JPEG-HDR%29.jpg","Avinash Kumar Singh","Chennai","B+","9931778331",4.5f));
-        DonarAdapter adapter = new DonarAdapter(donarModelClassList);
-        recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        getDonarList();
+
     }
     @Override
     public void finish() {
@@ -75,13 +78,38 @@ public class DonarListActivity extends AppCompatActivity {
         sharedPreferences=getSharedPreferences(myPreferences, Context.MODE_PRIVATE);
         final String latitude=sharedPreferences.getString(latitudeFinal,"");
         final String longitude=sharedPreferences.getString(longitudeFinal,"");
-        final String interest=sharedPreferences.getString(userInterestFinal,"");
+
+        final List<DonarModelClass> donarModelClassList = new ArrayList<>();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_POST+"getdonaracceptorlist.php", new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
-
+                try {
+                    JSONArray jsonArray=new JSONArray(response);
+                    if(jsonArray.length()>0){
+                        for(int i=0;i<jsonArray.length();i++){
+                            JSONObject jsonObject=jsonArray.getJSONObject(i);
+                            int id=Integer.parseInt(jsonObject.getString("id"));
+                            String profileUrl=jsonObject.getString("profile_url");
+                            String name=jsonObject.getString("name");
+                            String city=jsonObject.getString("city");
+                            Double distance=jsonObject.getDouble("distance");
+                            String contact_no=jsonObject.getString("contact_no");
+                            String blood_group=jsonObject.getString("blood_group");
+                            donarModelClassList.add(new DonarModelClass(id,profileUrl,name,city,blood_group,contact_no,distance));
+                        }
+                        DonarAdapter adapter = new DonarAdapter(donarModelClassList);
+                        recyclerView.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
+                        progressBar.setVisibility(View.INVISIBLE);
+                    }
+                    else{
+                        tvSorry.setVisibility(View.VISIBLE);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
             }
         }, new Response.ErrorListener() {
@@ -97,7 +125,8 @@ public class DonarListActivity extends AppCompatActivity {
 
                 params.put("latitude",latitude);
                 params.put("longitude",longitude);
-                params.put("interest",interest);
+                params.put("interest","Donar");
+                params.put("distance",String.valueOf(distance));
 
                 return params;
             }
