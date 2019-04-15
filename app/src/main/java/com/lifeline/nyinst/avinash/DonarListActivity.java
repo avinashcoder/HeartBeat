@@ -47,8 +47,8 @@ public class DonarListActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     RecyclerView recyclerView;
     ProgressBar progressBar;
-    int distance=50;
-    TextView tvSorry;
+    int distance=10;
+    TextView tvSorry,tvDistanceView;
     SeekBar seekBar;
 
     @Override
@@ -61,10 +61,12 @@ public class DonarListActivity extends AppCompatActivity {
         fabAcceptBlood=findViewById(R.id.donar_list_fab_accept_blood);
 
         seekBar=findViewById(R.id.donar_list_seekbar);
+        seekBar.setProgress(distance);
 
 
         progressBar=findViewById(R.id.donar_list_progress_bar);
         tvSorry=findViewById(R.id.donar_list_sorry_message);
+        tvDistanceView=findViewById(R.id.donar_list_distance_view);
 
         recyclerView=findViewById(R.id.donar_list_recycler_view);
         LinearLayoutManager layoutManager=new LinearLayoutManager(this);
@@ -77,16 +79,18 @@ public class DonarListActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 distance=progress;
+                tvDistanceView.setText(String.valueOf(progress));
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
+                tvDistanceView.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 getDonarList();
+                tvDistanceView.setVisibility(View.GONE);
             }
         });
 

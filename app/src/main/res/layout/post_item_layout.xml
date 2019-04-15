@@ -88,6 +88,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:textSize="18sp"
+                android:textColor="#444"
                 android:padding="5dp"/>
 
             <com.facebook.drawee.view.SimpleDraweeView
