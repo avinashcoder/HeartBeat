@@ -1,6 +1,5 @@
 package com.lifeline.nyinst.avinash;
 
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v4.view.ViewCompat;
@@ -10,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.animation.OvershootInterpolator;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -50,6 +50,7 @@ public class DonarListActivity extends AppCompatActivity {
     int distance=10;
     TextView tvSorry,tvDistanceView;
     SeekBar seekBar;
+    ImageView imgBackButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +68,7 @@ public class DonarListActivity extends AppCompatActivity {
         progressBar=findViewById(R.id.donar_list_progress_bar);
         tvSorry=findViewById(R.id.donar_list_sorry_message);
         tvDistanceView=findViewById(R.id.donar_list_distance_view);
+        imgBackButton=findViewById(R.id.donar_list_back_btn);
 
         recyclerView=findViewById(R.id.donar_list_recycler_view);
         LinearLayoutManager layoutManager=new LinearLayoutManager(this);
@@ -74,6 +76,14 @@ public class DonarListActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         getDonarList();
+
+        imgBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+            }
+        });
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override

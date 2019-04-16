@@ -10,7 +10,7 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#FF4500">
+        android:background="@color/colorPrimary">
 
         <ImageView
             android:id="@+id/setting_back_imgview"
@@ -142,6 +142,7 @@
                 android:paddingBottom="5dp">
 
                 <LinearLayout
+                    android:id="@+id/setting_contact_number_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center|left"
@@ -157,6 +158,7 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:id="@+id/setting_contact_number"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
@@ -208,6 +210,7 @@
 
 
                 <TextView
+                    android:id="@+id/setting_deactivate_account"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center|left"

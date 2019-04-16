@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,8 +44,10 @@ public class AcceptorListActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     RecyclerView recyclerView;
     ProgressBar progressBar;
-    int distance=50;
-    TextView tvSorry;
+    int distance=10;
+    TextView tvSorry,tvDistanceView;
+    SeekBar seekBar;
+    ImageView imgBackButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,15 +58,47 @@ public class AcceptorListActivity extends AppCompatActivity {
         fabDonateBlood=findViewById(R.id.acceptor_list_fab_donate_blood);
         fabAcceptBlood=findViewById(R.id.acceptor_list_fab_accept_blood);
 
+        seekBar=findViewById(R.id.acceptor_list_seekbar);
+        seekBar.setProgress(distance);
+
         progressBar=findViewById(R.id.acceptor_list_progress_bar);
         tvSorry=findViewById(R.id.acceptor_list_sorry_message);
+        tvDistanceView=findViewById(R.id.acceptor_list_distance_view);
+        imgBackButton=findViewById(R.id.acceptor_list_back_btn);
 
         recyclerView=findViewById(R.id.acceptor_list_recycler_view);
         LinearLayoutManager layoutManager=new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
-        getDonarList();
+        getAcceptorList();
+
+        imgBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+            }
+        });
+
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                distance=progress;
+                tvDistanceView.setText(String.valueOf(progress));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                tvDistanceView.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                getAcceptorList();
+                tvDistanceView.setVisibility(View.GONE);
+            }
+        });
     }
 
     @Override
@@ -71,7 +107,7 @@ public class AcceptorListActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
     }
 
-    private void getDonarList(){
+    private void getAcceptorList(){
         sharedPreferences=getSharedPreferences(myPreferences, Context.MODE_PRIVATE);
         final String latitude=sharedPreferences.getString(latitudeFinal,"");
         final String longitude=sharedPreferences.getString(longitudeFinal,"");
@@ -96,13 +132,17 @@ public class AcceptorListActivity extends AppCompatActivity {
                             String blood_group=jsonObject.getString("blood_group");
                             acceptorListModelClassList.add(new AcceptorListModelClass(id,profileUrl,name,city,blood_group,contact_no,distance));
                         }
+                        recyclerView.setVisibility(View.VISIBLE);
                         AcceptorListAdapter adapter = new AcceptorListAdapter(acceptorListModelClassList);
                         recyclerView.setAdapter(adapter);
                         adapter.notifyDataSetChanged();
-                        progressBar.setVisibility(View.INVISIBLE);
+                        progressBar.setVisibility(View.GONE);
+                        tvSorry.setVisibility(View.GONE);
                     }
                     else{
                         tvSorry.setVisibility(View.VISIBLE);
+                        recyclerView.setVisibility(View.INVISIBLE);
+                        progressBar.setVisibility(View.GONE);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
