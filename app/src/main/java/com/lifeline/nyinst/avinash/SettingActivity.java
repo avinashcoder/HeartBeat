@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -53,13 +54,12 @@ public class SettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final AlertDialog.Builder alert = new AlertDialog.Builder(SettingActivity.this);
-                final EditText input = new EditText(SettingActivity.this);
-                alert.setView(input);
+
+                alert.setView(R.layout.change_contact_details);
+                alert.setTitle("Change Contact Details");
                 alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        String value = input.getText().toString().trim();
-                        Toast.makeText(getApplicationContext(), value,
-                                Toast.LENGTH_SHORT).show();
+
                     }
                 });
 
@@ -196,7 +196,6 @@ public class SettingActivity extends AppCompatActivity {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("old_country_code",userCountryCode);
                 params.put("old_contact_no", userContactNo);
-
                 params.put("new_country_code",userCountryCode);
                 params.put("new_contact_no", userContactNo);
                 return params;
