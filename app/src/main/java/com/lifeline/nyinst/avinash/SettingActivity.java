@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import com.android.volley.toolbox.Volley;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import static com.lifeline.nyinst.avinash.SplashActivity.URL_POST;
 import static com.lifeline.nyinst.avinash.SplashActivity.contactNumberFinal;
@@ -33,8 +35,10 @@ import static com.lifeline.nyinst.avinash.SplashActivity.myPreferences;
 public class SettingActivity extends AppCompatActivity {
     TextView settingSignOut, deactivateAccount,contactNumber;
     SharedPreferences sharedPreferences;
-    String userContactNo,userCountryCode;
+    String userContactNo,userCountryCode,newContactNo,newCountryCode;
     LinearLayout contactNumberLayout;
+    EditText edCountryCode,edContactNumber,edOTP;
+    String OTP,URL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,12 +58,29 @@ public class SettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final AlertDialog.Builder alert = new AlertDialog.Builder(SettingActivity.this);
-
-                alert.setView(R.layout.change_contact_details);
-                alert.setTitle("Change Contact Details");
+                LayoutInflater inflater=getLayoutInflater();
+                View view=inflater.inflate(R.layout.change_contact_details,null);
+                edCountryCode=view.findViewById(R.id.change_contact_details_country_code);
+                edContactNumber=view.findViewById(R.id.change_contact_details_contact_no);
+                edOTP=view.findViewById(R.id.change_contact_details_otp);
+                edCountryCode.setText(userCountryCode);
+                edContactNumber.setText(userContactNo);
+                alert.setView(view);
+                alert.setTitle("Update Contact Details");
                 alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-
+                        newContactNo=edContactNumber.getText().toString().trim();
+                        newCountryCode=edCountryCode.getText().toString().trim();
+                        if(!(newCountryCode.equals("")||newContactNo.equals("")))
+                        {
+                            OTP=generateOTP();
+                            URL = "http://control.msg91.com/api/sendotp.php?otp_length=4&authkey=266493ATTdZz7uWMZ5c8255e9&message=Verification code to get connect with LifeLine is " + OTP + "&sender=LIFELN&mobile=" + newCountryCode + newContactNo + "&otp=" + OTP;
+                            sendOtp();
+                            otpValidate();
+                        }
+                        else{
+                            Toast.makeText(SettingActivity.this,"Plese enter valid contact number and country code",Toast.LENGTH_LONG).show();
+                        }
                     }
                 });
 
@@ -156,7 +177,6 @@ public class SettingActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(SettingActivity.this, "Sorry Unable to process your request...Try Later", Toast.LENGTH_LONG).show();
-                    changeContactNumber();
             }
         }) {
             @Override
@@ -179,7 +199,8 @@ public class SettingActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 if (response.contains("success")) {
                     Toast.makeText(SettingActivity.this, "Successfully Changed Your Contact Number", Toast.LENGTH_LONG).show();
-                    removeSharedPreferencesData();
+                    SharedPreferences.Editor editor=sharedPreferences.edit();
+                    editor.putString(contactNumberFinal,newContactNo);
                 } else {
                     Toast.makeText(SettingActivity.this, "Sorry Unable to process your request...Try Later", Toast.LENGTH_LONG).show();
                 }
@@ -196,8 +217,8 @@ public class SettingActivity extends AppCompatActivity {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("old_country_code",userCountryCode);
                 params.put("old_contact_no", userContactNo);
-                params.put("new_country_code",userCountryCode);
-                params.put("new_contact_no", userContactNo);
+                params.put("new_country_code",newCountryCode);
+                params.put("new_contact_no", newContactNo);
                 return params;
             }
         };
@@ -206,4 +227,84 @@ public class SettingActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
+
+    public void otpValidate(){
+        AlertDialog.Builder alert = new AlertDialog.Builder(SettingActivity.this);
+        LayoutInflater inflater=getLayoutInflater();
+        View view=inflater.inflate(R.layout.change_contact_details,null);
+        edCountryCode=view.findViewById(R.id.change_contact_details_country_code);
+        edContactNumber=view.findViewById(R.id.change_contact_details_contact_no);
+        edOTP=view.findViewById(R.id.change_contact_details_otp);
+        edCountryCode.setText(userCountryCode);
+        edContactNumber.setText(userContactNo);
+
+        edCountryCode.setVisibility(View.GONE);
+        edContactNumber.setVisibility(View.GONE);
+        edOTP.setVisibility(View.VISIBLE);
+        alert.setView(view);
+        alert.setTitle("Update Contact Details");
+        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                String inputOtp=edOTP.getText().toString().trim();
+                if(OTP.equals(inputOtp)){
+                    changeContactNumber();
+                }
+                else {
+                    Toast.makeText(SettingActivity.this,"Incorrect OTP, Plese Try Again",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                dialog.cancel();
+            }
+        });
+        alert.show();
+    }
+
+    public String generateOTP()
+    {
+        Random random=new Random();
+        String id = String.format("%04d", random.nextInt(10000));
+        return id;
+    }
+
+    public void sendOtp(){
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                if(response.contains("success")){
+
+                    new Handler().postDelayed(new Runnable(){
+                        @Override
+                        public void run() {
+
+                        }
+                    }, 2000);
+
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"Unable to send OTP. Plese try again",Toast.LENGTH_LONG).show();
+
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Toast.makeText(getApplicationContext(),"Unable to send OTP. Plese check your network connection and try again",Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+
+        RequestQueue requestQueue = Volley.newRequestQueue(SettingActivity.this);
+        requestQueue.add(stringRequest);
+
+    }
+
 }
