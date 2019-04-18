@@ -120,17 +120,17 @@ public class MobileVerificationActivity extends AppCompatActivity {
                     }
 
                     URL = "http://control.msg91.com/api/sendotp.php?otp_length=4&authkey=266493ATTdZz7uWMZ5c8255e9&message=Verification code to get connect with LifeLine is " + OTP + "&sender=LIFELN&mobile=" + countryCode + contactNo + "&otp=" + OTP;
-                    //sendOtp();
+                    sendOtp();
 
-                    imgBackBtn.setVisibility(View.VISIBLE);
-                    mob_linear_layout.setVisibility(View.GONE);
-                    otp_linear_layout.setVisibility(View.VISIBLE);
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            et_otp.setText(OTP);
-                        }
-                    }, 3000);
+//                    imgBackBtn.setVisibility(View.VISIBLE);
+//                    mob_linear_layout.setVisibility(View.GONE);
+//                    otp_linear_layout.setVisibility(View.VISIBLE);
+//                    new Handler().postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            et_otp.setText(OTP);
+//                        }
+//                    }, 3000);
 
                 }
 

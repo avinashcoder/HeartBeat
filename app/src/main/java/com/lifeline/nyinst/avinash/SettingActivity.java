@@ -153,7 +153,7 @@ public class SettingActivity extends AppCompatActivity {
     private void removeSharedPreferencesData() {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
-        editor.commit();
+        editor.apply();
         Intent i = new Intent(SettingActivity.this, MobileVerificationActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -266,8 +266,8 @@ public class SettingActivity extends AppCompatActivity {
     public String generateOTP()
     {
         Random random=new Random();
-        String id = String.format("%04d", random.nextInt(10000));
-        return id;
+        String otp = String.format("%04d", random.nextInt(10000));
+        return otp;
     }
 
     public void sendOtp(){
