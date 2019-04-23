@@ -10,7 +10,8 @@ import android.os.Bundle;
 public class SplashActivity extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;
-    static final String myPreferences="LifeLineData";
+    public static final String myPreferences="LifeLineData";
+    public static final String idFinal="userIdKey";
     public static final String countryCodeFinal="countryCodeKey";
     public static final String contactNumberFinal="contactNumberKey";
     public static final String profilePicFinal="profilePicKey";
@@ -27,6 +28,7 @@ public class SplashActivity extends AppCompatActivity {
     public static final String latitudeFinal="latitudeKey";
     public static final String longitudeFinal="longitudeKey";
     public static String URL_POST ="https://lifelineblood.000webhostapp.com/lifeline/";
+    //public static String URL_POST ="http://192.168.43.253/lifeline/";
 
     private final int SPLASH_DISPLAY_LENGTH = 3000;
 

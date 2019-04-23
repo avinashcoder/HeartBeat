@@ -19,6 +19,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,6 +34,7 @@ import static com.lifeline.nyinst.avinash.SplashActivity.countryCodeFinal;
 import static com.lifeline.nyinst.avinash.SplashActivity.countryFinal;
 import static com.lifeline.nyinst.avinash.SplashActivity.dobFinal;
 import static com.lifeline.nyinst.avinash.SplashActivity.genderFinal;
+import static com.lifeline.nyinst.avinash.SplashActivity.idFinal;
 import static com.lifeline.nyinst.avinash.SplashActivity.latitudeFinal;
 import static com.lifeline.nyinst.avinash.SplashActivity.longitudeFinal;
 import static com.lifeline.nyinst.avinash.SplashActivity.myPreferences;
@@ -152,12 +156,24 @@ public class RegistrationGenderActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
-                if(response.contains("success")){
-                    nextHomeActivity();
+                try {
+                    JSONObject jsonObject=new JSONObject(response);
+                    String status=jsonObject.getString("status");
+                    if(status.equals("success")){
+                        String id=jsonObject.getString("id");
+                        Toast.makeText(getApplicationContext(), id, Toast.LENGTH_LONG).show();
+                        SharedPreferences.Editor editor=sharedPreferences.edit();
+                        editor.putString(idFinal,id);
+                        editor.apply();
+                        nextHomeActivity();
+                    }
+                    else {
+                        handleErrorVolley();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-                else {
-                    handleErrorVolley();
-                }
+
             }
         }, new Response.ErrorListener() {
             @Override

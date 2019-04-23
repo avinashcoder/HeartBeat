@@ -40,6 +40,7 @@ import static com.lifeline.nyinst.avinash.SplashActivity.countryCodeFinal;
 import static com.lifeline.nyinst.avinash.SplashActivity.countryFinal;
 import static com.lifeline.nyinst.avinash.SplashActivity.dobFinal;
 import static com.lifeline.nyinst.avinash.SplashActivity.genderFinal;
+import static com.lifeline.nyinst.avinash.SplashActivity.idFinal;
 import static com.lifeline.nyinst.avinash.SplashActivity.latitudeFinal;
 import static com.lifeline.nyinst.avinash.SplashActivity.longitudeFinal;
 import static com.lifeline.nyinst.avinash.SplashActivity.myPreferences;
@@ -62,7 +63,7 @@ public class MobileVerificationActivity extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;
 
-    String name,birthday,address,bloodGroup,gender,userType,city,state,country,latitude,longitude,interest,profilePicString="default";
+    String userId,name,birthday,address,bloodGroup,gender,userType,city,state,country,latitude,longitude,interest,profilePicString="default";
 
 
     @Override
@@ -120,17 +121,17 @@ public class MobileVerificationActivity extends AppCompatActivity {
                     }
 
                     URL = "http://control.msg91.com/api/sendotp.php?otp_length=4&authkey=266493ATTdZz7uWMZ5c8255e9&message=Verification code to get connect with LifeLine is " + OTP + "&sender=LIFELN&mobile=" + countryCode + contactNo + "&otp=" + OTP;
-                    sendOtp();
+                    //sendOtp();
 
-//                    imgBackBtn.setVisibility(View.VISIBLE);
-//                    mob_linear_layout.setVisibility(View.GONE);
-//                    otp_linear_layout.setVisibility(View.VISIBLE);
-//                    new Handler().postDelayed(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            et_otp.setText(OTP);
-//                        }
-//                    }, 3000);
+                    imgBackBtn.setVisibility(View.VISIBLE);
+                    mob_linear_layout.setVisibility(View.GONE);
+                    otp_linear_layout.setVisibility(View.VISIBLE);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            et_otp.setText(OTP);
+                        }
+                    }, 3000);
 
                 }
 
@@ -153,6 +154,7 @@ public class MobileVerificationActivity extends AppCompatActivity {
     private void updateSharedPreferencePreviouslyRegistered() {
         sharedPreferences = getSharedPreferences(myPreferences, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(idFinal,userId);
         editor.putString(contactNumberFinal, contactNo);
         editor.putString(countryCodeFinal, countryCode);
         editor.putString(nameFinal,name);
@@ -192,6 +194,8 @@ public class MobileVerificationActivity extends AppCompatActivity {
                 if(!(response.contains("nodatafound"))) {
                     try {
                         JSONObject jsonObject = new JSONObject(response);
+                        userId = jsonObject.getString("id");
+                        Toast.makeText(getApplicationContext(),userId,Toast.LENGTH_SHORT).show();
                         name = jsonObject.getString("name");
                         birthday = jsonObject.getString("birthday");
                         bloodGroup = jsonObject.getString("bloodgroup");

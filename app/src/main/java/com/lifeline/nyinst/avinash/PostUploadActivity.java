@@ -37,6 +37,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.lifeline.nyinst.avinash.SplashActivity.URL_POST;
 import static com.lifeline.nyinst.avinash.SplashActivity.contactNumberFinal;
+import static com.lifeline.nyinst.avinash.SplashActivity.idFinal;
 import static com.lifeline.nyinst.avinash.SplashActivity.myPreferences;
 import static com.lifeline.nyinst.avinash.SplashActivity.profilePicFinal;
 
@@ -51,7 +52,7 @@ public class PostUploadActivity extends AppCompatActivity {
     private final int IMG_REQUEST = 1;
     Bitmap bitmap;
     SharedPreferences sharedPreferences;
-    String contactNumber;
+    String userId,contactNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,6 +113,9 @@ public class PostUploadActivity extends AppCompatActivity {
         }
         if(sharedPreferences.contains(contactNumberFinal)){
             contactNumber=sharedPreferences.getString(contactNumberFinal,"Contact");
+        }
+        if(sharedPreferences.contains(idFinal)){
+            userId=sharedPreferences.getString(idFinal,"id");
         }
     }
 
@@ -174,7 +178,7 @@ public class PostUploadActivity extends AppCompatActivity {
 
                 String postDesc=postUploadText.getText().toString().trim();
 
-                params.put("mob_no",contactNumber);
+                params.put("id",userId);
                 params.put("post_desc",postDesc);
                 if(isImageSelected) {
                     params.put("postimg", encodeTobase64(bitmap));

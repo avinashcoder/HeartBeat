@@ -19,6 +19,7 @@
             android:layout_gravity="center"
             android:clickable="true"
             android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:src="@drawable/ic_action_back_arrow_white" />
 
         <TextView
@@ -100,9 +101,10 @@
                 android:layout_marginTop="10dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center|left"
+                    android:gravity="center|start"
                     android:layout_marginLeft="15dp"
                     android:text="Push Notification"
                     android:textColor="@android:color/background_dark"
@@ -141,18 +143,24 @@
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp">
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/ic_action_phone" />
+
+
                 <LinearLayout
                     android:id="@+id/setting_contact_number_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center|left"
-                    android:layout_marginBottom="5dp"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="65dp"
+                        android:layout_marginLeft="50dp"
                         android:text="Change Mobile Number"
                         android:textColor="@android:color/background_dark"
                         android:textSize="16sp" />
@@ -162,7 +170,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
-                        android:layout_marginLeft="65dp"
+                        android:layout_marginLeft="50dp"
                         android:text="9006630730"
                         android:textColor="@android:color/holo_blue_dark"
                         android:textSize="16sp" />
